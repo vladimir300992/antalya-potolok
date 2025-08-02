@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Натяжные потолки в Анталии | Цены 2024</title>
+    <meta name="description" content="Профессиональный монтаж натяжных потолков в Анталии. Немецкие материалы, гарантия 10 лет. Расчет стоимости онлайн.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <!-- Логотип -->
+            <div class="logo">
+                <img src="img/logo.png" alt="Antalya stretch ceilings Анталия натяжные потолки" class="logo-img">
+            </div>
+
+            <!-- Центральный текст -->
+            <div class="header-text">
+                <span>Мы профессионально устанавливаем натяжные потолки в Анталии по лучшим ценам</span>
+                <span class="emoji">👍</span>
+            </div>
+
+            <!-- Контакты -->
+            <div class="header-contacts">
+                <a href="tel:+905348287110" class="phone">+90 534 828 71 10</a>
+                <div class="social-links">
+                    <a href="https://instagram.com/antalya_potolok" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
+                    <a href="https://t.me/antalya_potolki" target="_blank"><img src="img/telegram.svg" alt="Telegram"></a>
+                    <a href="https://wa.me/905348287110" target="_blank"><img src="img/whatsapp.svg" alt="WhatsApp"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Навигационное меню -->
+        <nav class="navbar-fullwidth">
+            <div class="container">
+                <button class="mobile-menu-toggle">
+                    <span class="menu-text">Меню</span>
+                    <span class="menu-icon">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </span>
+                </button>
+
+                <ul class="navbar-menu">
+                    <li class="active"><a href="/akcii">Акции</a></li>
+                    <li><a href="/ceny">Цены</a></li>
+                    <li><a href="/potolki">Каталог</a></li>
+                    <li><a href="/rphotos">Наши работы</a></li>
+                    <li><a href="/otzyvy">Отзывы</a></li>
+                    <li><a href="/company">О компании</a></li>
+                    <li><a href="/kontakty">Контакты</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Герой-секция -->
+    <section class="main">
+        <div class="container">
+            <h1>Натяжные потолки в Анталии <br> <span> от 20$ за м² под ключ</span> <br> Работаем по всему региону!</h1>
+            <ul class="benefits-list">
+                <li>
+                    <img src="img/checkmark.svg" alt="Немецкие полотна BAUF" class="check-icon">
+                    Немецкие полотна BAUF
+                </li>
+                <li>
+                    <img src="img/checkmark.svg" alt="Без пыли и грязи" class="check-icon">
+                    Без пыли и грязи
+                </li>
+                <li>
+                    <img src="img/checkmark.svg" alt="Потолок за 1 день" class="check-icon">
+                    Потолок за 1 день
+                </li>
+                <li>
+                    <img src="img/checkmark.svg" alt="Гарантия 2 года" class="check-icon">
+                    Гарантия 2 года
+                </li>
+                <li>
+                    <img src="img/checkmark.svg" alt="Бесплатное обслуживание" class="check-icon">
+                    Бесплатное обслуживание
+                </li>
+            </ul>
+            <div class="calculator-actions">
+              <button class="btn" id="scrollToCalculator">Рассчитать стоимость</button>
+              <button class="btn btn-secondary" id="openModal">Заказать замер</button>
+          </div>
+
+        </div>
+    </section>
+
+    <!-- Калькулятор -->
+    <div class="calculator" id="calculatorSection">
+        <h2>Калькулятор стоимости</h2>
+        <form id="calcForm">
+            <!-- Поля ввода -->
+            <div class="form-group">
+                <label for="area">Площадь (м²)</label>
+                <input type="number" id="area" min="1" step="1" value="12" required>
+            </div>
+
+            <div class="form-group">
+                <label for="perimeter">Периметр (м)</label>
+                <input type="number" id="perimeter" min="1" step="1" value="10" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lights">Количество светильников</label>
+                <input type="number" id="lights" min="0" value="5">
+            </div>
+
+            <!-- Выбор типа полотна -->
+            <div class="form-group">
+                <label>Тип полотна</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="canvas" value="matte" checked> Матовый</label>
+                    <label><input type="radio" name="canvas" value="glossy"> Глянцевый</label>
+                </div>
+            </div>
+
+            <!-- Выбор профиля -->
+            <div class="form-group">
+                <label>Тип профиля</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="profile" value="standard" checked> Стандартный</label>
+                    <label><input type="radio" name="profile" value="shadow"> Теневой</label>
+                </div>
+            </div>
+
+            <!-- Кнопка и результат -->
+            <div class="form-group">
+                <button type="button" id="calculateBtn" class="btn">Рассчитать</button>
+                <div id="calcResult" class="result-box" style="display:none"></div>
+            </div>
+        </form>
+
+        <!-- Форма для данных -->
+        <div id="clientForm" style="display:none">
+            <h3>Оставьте контакты чтобы зарезервивровать стоимость с учетом скидки</h3>
+            <div class="form-group">
+                <label for="name">Ваше имя</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Телефон</label>
+                <input type="tel" id="phone" required>
+            </div>
+            <button type="button" class="btn" onclick="sendToGoogleSheets()">Отправить</button>
+        </div>
+    </div>
+
+    <!-- Подвал -->
+    <footer id="contacts" class="footer">
+        <div class="container">
+            <h3>Контакты</h3>
+            <p>Анталия, ул. Примерная, 123</p>
+            <p>Телефон: <a href="tel:+905348287110">+90 534 828 71 10</a></p>
+        </div>
+    </footer>
+
+    <!-- Модальное окно -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Оставьте заявку</h3>
+            <form>
+                <input type="text" placeholder="Ваше имя" required>
+                <input type="tel" placeholder="Телефон" required>
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
