@@ -1,0 +1,59 @@
+/* pages.css */
+.page-header {
+  background: linear-gradient(rgba(0,0,0,0.7));
+  background-size: cover;
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+}
+
+.about-content {
+  padding: 80px 0;
+}
+
+.about-content .container {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-image {
+  flex: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.principles {
+  background: #f9f9f9;
+  padding: 80px 0;
+}
+
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.principle {
+  text-align: center;
+  padding: 30px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s;
+}
+
+.principle:hover {
+  transform: translateY(-10px);
+}
+
+.principle img {
+  height: 60px;
+  margin-bottom: 20px;
+}
