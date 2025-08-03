@@ -78,5 +78,3 @@ function initCommonComponents() {
     }
 }
 
-// Запуск инициализации при загрузке страницы
-document.addEventListener('DOMContentLoaded', initCommonComponents);

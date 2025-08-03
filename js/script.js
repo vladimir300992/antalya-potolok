@@ -96,8 +96,25 @@ function sendToGoogleSheets() {
 
 // Инициализация калькулятора
 document.addEventListener('DOMContentLoaded', function() {
+    // Инициализация общих компонентов
+    if (typeof initCommonComponents === 'function') {
+        initCommonComponents();
+    }
+
     const calculateBtn = document.getElementById('calculateBtn');
     if (calculateBtn) {
         calculateBtn.addEventListener('click', calculatePrice);
+    }
+
+    // Инициализация AOS
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            easing: 'ease',
+            once: true,
+            mirror: false,
+            offset: 120,
+            delay: 100,
+        });
     }
 });
