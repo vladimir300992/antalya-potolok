@@ -1,72 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Инициализация мобильного меню
-    const menuToggle = document.querySelector('.mobile-menu-toggle');
-    if (menuToggle) {
-        menuToggle.addEventListener('click', function() {
-            const menu = document.querySelector('.navbar-menu');
-            menu.classList.toggle('show');
-            this.classList.toggle('open');
-        });
-    }
-
-    // Обработчик кнопки расчета в калькуляторе
-    const calculateBtn = document.getElementById('calculateBtn');
-    if (calculateBtn) {
-        calculateBtn.addEventListener('click', calculatePrice);
-    }
-
-    // Обработчик модального окна
-    const modal = document.getElementById('modal');
-    const openModalBtn = document.getElementById('openModal');
-    const closeBtn = document.querySelector('.close');
-
-    if (openModalBtn) {
-        openModalBtn.addEventListener('click', () => {
-            modal.style.display = 'flex';
-        });
-    }
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-    }
-
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-
-    // Форматирование телефона
-    const phoneInput = document.getElementById('phone');
-    if (phoneInput) {
-        phoneInput.addEventListener('input', function(e) {
-            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-            e.target.value = !x[2] ? x[1] : x[1] + ' ' + x[2] + (x[3] ? ' ' + x[3] : '');
-        });
-    }
-
-    // Плавная прокрутка к калькулятору
-    const scrollToCalculatorBtn = document.getElementById('scrollToCalculator');
-    if (scrollToCalculatorBtn) {
-        scrollToCalculatorBtn.addEventListener('click', function() {
-            const calculatorSection = document.getElementById('calculatorSection');
-            if (calculatorSection) {
-                calculatorSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-
-                // Добавляем анимацию подсветки
-                calculatorSection.classList.remove('highlight-animation');
-                void calculatorSection.offsetWidth;
-                calculatorSection.classList.add('highlight-animation');
-            }
-        });
-    }
-});
-
+// Функция расчета стоимости
 function calculatePrice() {
     // Получаем значения
     const perimeter = parseFloat(document.getElementById('perimeter').value) || 0;
@@ -92,12 +24,12 @@ function calculatePrice() {
     // Отображаем результат с анимацией
     const result = document.getElementById('calcResult');
     result.innerHTML = `
-        <div style="margin-bottom: 15px; font-size: 18px;">Стоимость по заданным параметрам:</div>
+        <div style="margin-bottom: 15px; font-size: 18px; font-weight: 500;">Стоимость по заданным параметрам:</div>
         <div class="price-container">
             <div class="old-price-wrapper">
                 <span class="old-price">${price} $</span>
             </div>
-            <div class="discount-badge">Ваша скидка 10%!</div>
+            <div class="discount-badge">Ваша скидка 10%: -${discount} $</div>
             <div class="new-price">Итого: ${finalPrice} $</div>
         </div>
     `;
@@ -115,6 +47,7 @@ function calculatePrice() {
     document.getElementById('clientForm').style.display = 'block';
 }
 
+// Функция отправки данных в Google Sheets
 function sendToGoogleSheets() {
     const name = document.getElementById('name').value;
     const phone = document.getElementById('phone').value;
@@ -160,3 +93,11 @@ function sendToGoogleSheets() {
         alert('Произошла ошибка. Пожалуйста, позвоните нам напрямую.');
     });
 }
+
+// Инициализация калькулятора
+document.addEventListener('DOMContentLoaded', function() {
+    const calculateBtn = document.getElementById('calculateBtn');
+    if (calculateBtn) {
+        calculateBtn.addEventListener('click', calculatePrice);
+    }
+});

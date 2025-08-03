@@ -4,39 +4,46 @@
     --dark: #2c3e50;
     --light: #ecf0f1;
     --accent: #e74c3c;
+    --text: #333;
+    --gray: #95a5a6;
 }
 
 body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
-    color: var(--dark);
+    color: var(--text);
     line-height: 1.6;
+    background-color: #fafafa;
 }
 
 .container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 0 15px;
 }
 
 /* Шапка */
 .header {
     background: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
+    position: sticky;
+    top: 0;
     width: 100%;
     z-index: 1000;
     padding: 15px 0;
 }
 
-/* Логотип */
-.logo {
+.header .container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* Логотип */
+.logo {
+    flex: 0 0 auto;
 }
 
 .logo-img {
@@ -56,6 +63,7 @@ body {
     padding: 0 20px;
     font-size: 18px;
     color: #555;
+    margin: 10px 0;
 }
 
 .emoji {
@@ -74,10 +82,11 @@ body {
 
 .phone {
     font-weight: 600;
-    color: #4c4c4c;
+    color: var(--dark);
     text-decoration: none;
     margin-bottom: 5px;
-    font-size: 16px;
+    font-size: 18px;
+    white-space: nowrap;
 }
 
 .social-links {
@@ -98,9 +107,9 @@ body {
 
 /* Навигационное меню */
 .navbar-fullwidth {
-    margin-top: 15px;
     background: #4c4c4c;
     width: 100%;
+    margin-top: 10px;
 }
 
 .navbar-fullwidth .container {
@@ -127,28 +136,29 @@ body {
     padding: 15px 10px;
     display: block;
     transition: all 0.3s;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
 }
 
 .navbar-menu a:hover {
-    background: #ff8b44;
+    background: var(--primary);
 }
 
 .navbar-menu .active a {
-    background: #ff8b44;
+    background: var(--primary);
     font-weight: 600;
 }
 
 .mobile-menu-toggle {
     display: none;
-    background: #ff8b44;
+    background: var(--primary);
     color: white;
     border: none;
     padding: 12px 15px;
     width: 100%;
     text-align: left;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .menu-icon {
@@ -165,14 +175,15 @@ body {
 
 /* Main-секция */
 .main {
-    background: #4c4c4c;
+    background: linear-gradient(rgba(76, 76, 76, 0.9), rgba(76, 76, 76, 0.9)), url('img/hero-bg.jpg');
+    background-size: cover;
     color: white;
-    padding: 180px 0 40px;
+    padding: 150px 0 80px;
     text-align: center;
 }
 
 .main h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 20px;
     line-height: 1.3;
 }
@@ -183,8 +194,8 @@ body {
 
 .benefits-list {
     list-style: none;
-    padding: 20px;
-    margin: 30px auto;
+    padding: 0;
+    margin: 40px auto;
     max-width: 600px;
 }
 
@@ -208,15 +219,14 @@ body {
 /* Кнопки */
 .calculator-actions {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 20px;
-    max-width: 300px;
-    margin: 30px auto 0;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+    justify-content: center;
 }
 
 .btn {
-    padding: 14px 24px;
+    padding: 14px 30px;
     background: var(--primary);
     color: white;
     border: none;
@@ -226,42 +236,67 @@ body {
     font-weight: 500;
     transition: all 0.3s;
     text-align: center;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .btn:hover {
     background: #e6772e;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-secondary {
+    background: #2c3e50;
+}
+
+.btn-secondary:hover {
+    background: #1a252f;
 }
 
 /* Калькулятор */
 .calculator {
-    background: #f9f9f9;
-    padding: 30px;
-    border-radius: 8px;
-    max-width: 600px;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 800px;
     margin: 50px auto;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+}
+
+.calculator h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--dark);
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-weight: 500;
     font-size: 16px;
+    color: var(--dark);
 }
 
-.form-group input[type="number"] {
+.form-group input[type="number"],
+.form-group input[type="text"],
+.form-group input[type="tel"] {
     width: 100%;
     padding: 12px 15px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
     box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    outline: none;
 }
 
 .radio-group {
@@ -276,19 +311,19 @@ body {
     gap: 8px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: normal;
 }
 
 .result-box {
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 25px;
+    padding: 25px;
     background: #e8f4fc;
     border-radius: 8px;
-    font-weight: bold;
-    text-align: center;
-    display: none;
     border-left: 4px solid #3498db;
+    display: none;
 }
-/* Анимация подсветки калькулятора */
+
+/* Анимации */
 @keyframes highlight {
     0% { box-shadow: 0 0 0 0 rgba(255, 139, 68, 0.5); }
     50% { box-shadow: 0 0 0 10px rgba(255, 139, 68, 0.3); }
@@ -299,30 +334,6 @@ body {
     animation: highlight 1.5s ease;
 }
 
-/* Анимация кнопки */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-#scrollToCalculator:hover {
-    animation: pulse 0.5s ease;
-}
-
-#scrollToCalculator svg {
-    transition: transform 0.3s;
-}
-
-#scrollToCalculator:hover svg {
-    transform: translateY(3px);
-}
-/* Анимации */
-.price-container {
-    position: relative;
-    margin: 20px 0;
-}
-
 .old-price-wrapper {
     display: inline-block;
     position: relative;
@@ -330,7 +341,7 @@ body {
 
 .old-price {
     font-size: 24px;
-    color: #95a5a6;
+    color: var(--gray);
     position: relative;
     display: inline;
 }
@@ -342,20 +353,20 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: #e74c3c;
+    background: var(--accent);
     animation: strike 0.4s ease-out forwards;
     animation-delay: 0.3s;
 }
 
 .discount-badge {
-    background: #e74c3c;
+    background: var(--accent);
     color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 8px 20px;
+    border-radius: 30px;
     font-size: 16px;
     font-weight: bold;
-    margin-right: 33%;
-    margin-left: 33%;
+    display: inline-block;
+    margin: 15px 0;
     opacity: 0;
     transform: translateY(10px);
     animation: fadeInUp 0.4s ease-out forwards;
@@ -402,6 +413,12 @@ body {
     width: 90%;
     max-width: 500px;
     position: relative;
+    animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .close {
@@ -411,19 +428,168 @@ body {
     font-size: 28px;
     cursor: pointer;
     color: #555;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: var(--accent);
 }
 
 /* Футер */
 .footer {
-    background: #2c3e50;
+    background: var(--dark);
     color: white;
-    padding: 40px 0;
-    text-align: center;
+    padding: 60px 0 30px;
 }
 
-.footer a {
-    color: #ff8b44;
+.footer-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.footer-col h3 {
+    color: var(--primary);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.footer-col p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.footer-col a {
+    color: white;
     text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-col a:hover {
+    color: var(--primary);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+}
+
+/* Страница "О компании" */
+.page-content {
+    padding: 100px 0;
+}
+
+.page-content h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--dark);
+}
+
+.about-section {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 60px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.about-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-text h2 {
+    color: var(--primary);
+    margin-top: 0;
+}
+
+.about-image {
+    flex: 1;
+    min-width: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: var(--gray);
+}
+
+.principles {
+    background: #f8f9fa;
+    padding: 60px 0;
+    border-radius: 10px;
+}
+
+.principles h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--dark);
+}
+
+.principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.principle {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.principle:hover {
+    transform: translateY(-10px);
+}
+
+.principle img {
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.principle h3 {
+    color: var(--dark);
+    margin-top: 0;
+    margin-bottom: 15px;
 }
 
 /* Адаптация для мобильных */
@@ -436,27 +602,32 @@ body {
         flex-direction: row;
         align-items: center;
         gap: 15px;
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
     }
 
     .phone {
-        font-size: 14px;
+        font-size: 16px;
     }
 
-    .logo-img {
-        height: 60px;
+    .logo {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
     }
 
     .main {
-        padding-top: 150px;
+        padding-top: 130px;
     }
 
     .main h1 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
 
     .benefits-list li {
-        font-size: 16px;
         justify-content: flex-start;
+        font-size: 16px;
     }
 
     .mobile-menu-toggle {
@@ -474,26 +645,26 @@ body {
 }
 
 @media (max-width: 768px) {
-    .container {
-        flex-wrap: wrap;
-    }
-
-    .header-contacts {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-        margin-top: 10px;
-    }
-
-    .logo {
-        width: 100%;
-        justify-content: center;
-        margin-bottom: 10px;
-    }
-
     .calculator {
-        padding: 20px;
-        margin: 30px auto;
+        padding: 25px;
+    }
+
+    .about-section {
+        flex-direction: column;
+    }
+
+    .footer-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .main h1 {
+        font-size: 1.5rem;
+    }
+
+    .calculator-actions {
+        flex-direction: column;
     }
 
     .radio-group {
@@ -501,30 +672,12 @@ body {
         gap: 10px;
     }
 
-    .calculator-actions {
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .main {
-        padding-top: 140px;
-    }
-
-    .main h1 {
-        font-size: 1.3rem;
-    }
-
-    .benefits-list li {
-        font-size: 14px;
-    }
-
     .btn {
-        padding: 12px 20px;
-        font-size: 15px;
+        width: 100%;
+        padding: 12px;
     }
 
-    .form-group input[type="number"] {
-        padding: 10px 12px;
+    .modal-content {
+        padding: 20px;
     }
 }

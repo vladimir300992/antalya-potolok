@@ -16,7 +16,9 @@
         <div class="container">
             <!-- Логотип -->
             <div class="logo">
-                <img src="img/logo.png" alt="Antalya stretch ceilings Анталия натяжные потолки" class="logo-img">
+                <a href="index.html">
+                    <img src="img/logo.png" alt="Antalya stretch ceilings Анталия натяжные потолки" class="logo-img">
+                </a>
             </div>
 
             <!-- Центральный текст -->
@@ -49,13 +51,13 @@
                 </button>
 
                 <ul class="navbar-menu">
-                    <li class="active"><a href="/akcii">Акции</a></li>
-                    <li><a href="/ceny">Цены</a></li>
-                    <li><a href="/potolki">Каталог</a></li>
-                    <li><a href="/rphotos">Наши работы</a></li>
-                    <li><a href="/otzyvy">Отзывы</a></li>
-                    <li><a href="/company">О компании</a></li>
-                    <li><a href="/kontakty">Контакты</a></li>
+                    <li><a href="akcii.html">Акции</a></li>
+                    <li><a href="ceny.html">Цены</a></li>
+                    <li><a href="potolki.html">Каталог</a></li>
+                    <li><a href="rphotos.html">Наши работы</a></li>
+                    <li><a href="otzyvy.html">Отзывы</a></li>
+                    <li><a href="company.html">О компании</a></li>
+                    <li><a href="kontakty.html">Контакты</a></li>
                 </ul>
             </div>
         </nav>
@@ -88,10 +90,9 @@
                 </li>
             </ul>
             <div class="calculator-actions">
-              <button class="btn" id="scrollToCalculator">Рассчитать стоимость</button>
-              <button class="btn btn-secondary" id="openModal">Заказать замер</button>
-          </div>
-
+                <button class="btn" id="scrollToCalculator">Рассчитать стоимость</button>
+                <button class="btn btn-secondary" id="openModal">Заказать замер</button>
+            </div>
         </div>
     </section>
 
@@ -142,7 +143,7 @@
 
         <!-- Форма для данных -->
         <div id="clientForm" style="display:none">
-            <h3>Оставьте контакты чтобы зарезервивровать стоимость с учетом скидки</h3>
+            <h3>Оставьте контакты для точного расчёта</h3>
             <div class="form-group">
                 <label for="name">Ваше имя</label>
                 <input type="text" id="name" required>
@@ -158,9 +159,30 @@
     <!-- Подвал -->
     <footer id="contacts" class="footer">
         <div class="container">
-            <h3>Контакты</h3>
-            <p>Анталия, ул. Примерная, 123</p>
-            <p>Телефон: <a href="tel:+905348287110">+90 534 828 71 10</a></p>
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h3>Натяжные потолки Antalya</h3>
+                    <p>Профессиональный монтаж немецких потолков BAUF в Анталии и регионе</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <p><a href="tel:+905348287110">+90 534 828 71 10</a></p>
+                    <p>flextavan.com</p>
+                    <p>Antalya, Bahçelievler, 137. Sk. No:5</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Часы работы</h3>
+                    <p>Пн-Пт: 9:00 - 19:00</p>
+                    <p>Сб: 10:00 - 16:00</p>
+                    <p>Вс: выходной</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Натяжные потолки в Анталии. Все права защищены.</p>
+            </div>
         </div>
     </footer>
 
@@ -170,13 +192,20 @@
             <span class="close">&times;</span>
             <h3>Оставьте заявку</h3>
             <form>
-                <input type="text" placeholder="Ваше имя" required>
-                <input type="tel" placeholder="Телефон" required>
-                <button type="submit">Отправить</button>
+                <div class="form-group">
+                    <label for="modal-name">Ваше имя</label>
+                    <input type="text" id="modal-name" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <label for="modal-phone">Телефон</label>
+                    <input type="tel" id="modal-phone" placeholder="Телефон" required>
+                </div>
+                <button type="submit" class="btn">Отправить</button>
             </form>
         </div>
     </div>
 
+    <script src="js/components.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
