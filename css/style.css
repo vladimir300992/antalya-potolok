@@ -905,166 +905,211 @@ body {
 }
 
 /* Стили для формы отзыва */
-.rating-stars {
-    display: flex;
-    gap: 8px;
-    margin-top: 10px;
-}
+/* Стили для адаптации отзывов */
+        .reviews-section {
+            padding: 40px 0;
+        }
 
-.rating-stars .star {
-    font-size: 32px;
-    cursor: pointer;
-    color: #ddd;
-    transition: all 0.2s ease;
-}
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
 
-.rating-stars .star.filled {
-    color: var(--primary);
-}
+        .section-subtitle {
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
 
-.rating-stars .star.hover {
-    transform: scale(1.2);
-    color: #ffcc00;
-}
+        .reviews-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
 
-#review-text {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
-    box-sizing: border-box;
-    resize: vertical;
-    min-height: 120px;
-    transition: border-color 0.3s;
-}
+        .review-card {
+            padding: 20px;
+            margin-bottom: 15px;
+        }
 
-#review-text:focus {
-    border-color: var(--primary);
-    outline: none;
-}
+        .review-header {
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
 
-/* Анимация для звезд */
-@keyframes star-pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.3); }
-    100% { transform: scale(1); }
-}
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
 
-.rating-stars .star.filled {
-    animation: star-pulse 0.5s ease;
-}
+        .review-name {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
 
-/* Дополнительные стили для Instagram секции */
-.instagram-section {
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    color: white;
-    padding: 5px 0 30px;
-    text-align: center;
-    border-radius: 15px;
-    margin: 40px 0;
-    position: relative;
-    overflow: hidden;
-}
+        .review-stars img {
+            width: 16px;
+            height: 16px;
+        }
 
-.instagram-section:before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    z-index: -1;
-    filter: blur(20px);
-    opacity: 0.7;
-}
+        .review-content {
+            font-size: 0.95rem;
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
 
-.instagram-content {
-    position: relative;
-    z-index: 2;
-}
+        .review-content:before {
+            font-size: 2rem;
+            top: -8px;
+        }
 
-.instagram-title {
-    font-size: 2.125rem;
-    margin-bottom: 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-}
+        .review-date {
+            font-size: 0.85rem;
+        }
 
-.instagram-title img {
-    width: 40px;
-    height: 40px;
-}
+        .reviews-actions {
+            flex-direction: column;
+            gap: 15px;
+        }
 
-.instagram-subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
+        .reviews-actions .btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+        }
 
-.instagram-link {
-    display: inline-block;
-    background: white;
-    color: #bc1888;
-    padding: 10px 20px 5px 20px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1.2rem;
-    text-decoration: none;
-    transition: all 0.3s;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
+        .instagram-section {
+            padding: 40px 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
 
-.instagram-link:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    background: #f8f8f8;
-}
+        .instagram-title {
+            font-size: 1.5rem;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-.instagram-link span {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
+        .instagram-title img {
+            width: 30px;
+            height: 30px;
+        }
 
-.instagram-link img {
-    width: 24px;
-    height: 24px;
-}
+        .instagram-subtitle {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
 
-.reviews-actions {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
+        .instagram-link {
+            padding: 12px 25px;
+            font-size: 1rem;
+        }
 
-@media (max-width: 768px) {
-    .instagram-title {
-        font-size: 1.8rem;
-    }
+        /* Мобильная навигация */
+        .mobile-menu-toggle {
+            display: block;
+        }
 
-    .instagram-subtitle {
-        font-size: 1rem;
-    }
+        .navbar-menu {
+            display: none;
+            flex-direction: column;
+        }
 
-    .instagram-link {
-        padding: 12px 25px;
-        font-size: 1rem;
-    }
+        .navbar-menu.show {
+            display: flex;
+        }
 
-    .reviews-actions {
-        flex-direction: column;
-        gap: 15px;
-    }
+        .navbar-menu li {
+            width: 100%;
+            text-align: left;
+        }
 
-    .reviews-actions .btn {
-        width: 100%;
-    }
-}
+        .navbar-menu a {
+            padding: 12px 15px;
+        }
+
+        /* Адаптация шапки */
+        .header .container {
+            flex-direction: column;
+        }
+
+        .logo {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .header-text {
+            display: none;
+        }
+
+        .header-contacts {
+            flex-direction: row;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .phone {
+            font-size: 16px;
+        }
+
+        /* Стили для формы отзыва */
+        .rating-stars {
+            gap: 5px;
+        }
+
+        .rating-stars .star {
+            font-size: 28px;
+        }
+
+        #review-text {
+            min-height: 100px;
+            padding: 10px;
+        }
+
+        /* Медиа-запросы для планшетов */
+        @media (min-width: 768px) {
+            .reviews-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .review-header {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .review-avatar {
+                margin-bottom: 0;
+                margin-right: 15px;
+            }
+
+            .reviews-actions {
+                flex-direction: row;
+            }
+
+            .reviews-actions .btn {
+                width: auto;
+            }
+        }
+
+        /* Медиа-запросы для десктопов */
+        @media (min-width: 992px) {
+            .reviews-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .reviews-section {
+                padding: 80px 0;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
