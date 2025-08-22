@@ -1422,4 +1422,38 @@ body {
     margin: 8px 0;
 }
 
+/* ----------------------------------------------------------
+ * Custom overrides for responsive navigation
+ *
+ * The original design hid the navigation menu on narrow screens and
+ * relied on a hamburger icon.  For this project the client wants
+ * the menu links to be always visible, even on mobile devices.  The
+ * following media query overrides the earlier rules by forcing the
+ * menu to display as a flexible row that wraps when necessary.  It
+ * also hides the mobile menu toggle completely.
+ */
+@media (max-width: 992px) {
+    /* Hide the burger button entirely */
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    /* Display the menu items in a flex container that wraps */
+    .navbar-menu {
+        display: flex !important;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    /* Each menu item takes half of the row on very small screens */
+    .navbar-menu li {
+        flex: 1 1 50%;
+        text-align: center;
+    }
+    /* Reduce padding and font-size for small screens */
+    .navbar-menu a {
+        padding: 12px 8px;
+        font-size: 15px;
+    }
+}
+
         }
