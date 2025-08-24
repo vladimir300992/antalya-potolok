@@ -2,11 +2,19 @@
 function initCommonComponents() {
     // Инициализация мобильного меню
     const menuToggle = document.querySelector('.mobile-menu-toggle');
-    if (menuToggle) {
+    const menu = document.querySelector('.navbar-menu');
+    if (menuToggle && menu) {
         menuToggle.addEventListener('click', function() {
-            const menu = document.querySelector('.navbar-menu');
             menu.classList.toggle('show');
             this.classList.toggle('open');
+        });
+
+        // Закрываем меню при выборе пункта
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.remove('show');
+                menuToggle.classList.remove('open');
+            });
         });
     }
 
