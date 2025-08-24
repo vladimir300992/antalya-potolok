@@ -683,7 +683,9 @@ body {
     }
 
     .mobile-menu-toggle {
-        display: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .navbar-menu {
@@ -1367,25 +1369,7 @@ body {
     font-weight: 500;
 }
 
-/* Адаптация горизонтального меню для узких экранов */
-@media (max-width: 768px) {
-    /* делаем список горизонтальным и скролируемым */
-    .navbar-menu {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-    /* элементы не растягиваются по ширине */
-    .navbar-menu li {
-        flex: 0 0 auto;
-        text-align: center;
-    }
-    .navbar-menu a {
-        padding: 12px 10px;
-        font-size: 14px;
-        white-space: nowrap;
-    }
-}
+/* Удалена прежняя горизонтальная адаптация меню для узких экранов */
 
 /* ------------------------------------------------------------------ */
 /* Contact page (kontakty.html)                                       */
