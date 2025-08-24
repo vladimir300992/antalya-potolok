@@ -683,15 +683,10 @@ body {
     }
 
     .mobile-menu-toggle {
-        display: block;
+        display: none;
     }
 
     .navbar-menu {
-        display: none;
-        flex-direction: column;
-    }
-
-    .navbar-menu.show {
         display: flex;
     }
 
@@ -1007,15 +1002,10 @@ body {
 
         /* Мобильная навигация */
         .mobile-menu-toggle {
-            display: block;
+            display: none;
         }
 
         .navbar-menu {
-            display: none;
-            flex-direction: column;
-        }
-
-        .navbar-menu.show {
             display: flex;
         }
 
@@ -1455,5 +1445,3 @@ body {
         font-size: 15px;
     }
 }
-
-        }
