@@ -105,6 +105,51 @@ body {
     opacity: 1;
 }
 
+/* Кнопки и подсказка под шапкой */
+.header-actions {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.action-hint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: #b0b0b0;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.action-hint .arrow {
+    font-size: 20px;
+    color: #b0b0b0;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.header-btn {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.header-btn:hover {
+    background: #e6772e;
+}
+
 /* Навигационное меню */
 .navbar-fullwidth {
     background: #4C4C4CE5;
