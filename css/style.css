@@ -47,29 +47,13 @@ body {
 }
 
 .logo-img {
-    height: 70px;
+    height: 105px;
     width: auto;
     transition: transform 0.3s;
 }
 
 .logo-img:hover {
     transform: scale(1.05);
-}
-
-/* Центральный текст */
-.header-text {
-    flex: 1;
-    text-align: center;
-    padding: 0 20px;
-    font-size: 18px;
-    color: #555;
-    margin: 10px 0;
-}
-
-.emoji {
-    font-size: 20px;
-    vertical-align: middle;
-    margin-left: 5px;
 }
 
 /* Контакты */
@@ -651,9 +635,6 @@ body {
 
 /* Адаптация для мобильных */
 @media (max-width: 992px) {
-    .header-text {
-        display: none;
-    }
 
     .header-contacts {
         flex-direction: row;
@@ -1031,9 +1012,6 @@ body {
             margin-bottom: 10px;
         }
 
-        .header-text {
-            display: none;
-        }
 
         .header-contacts {
             flex-direction: row;
