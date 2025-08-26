@@ -14,6 +14,7 @@ body {
     color: var(--text);
     line-height: 1.6;
     background-color: #fafafa;
+    overflow-x: hidden;
 }
 
 .container {
@@ -54,6 +55,12 @@ body {
 
 .logo-img:hover {
     transform: scale(1.05);
+}
+
+/* Ensure all images are responsive */
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Центральный текст */
@@ -1410,5 +1417,44 @@ body {
 
 .contact-info p {
     margin: 8px 0;
+}
+
+/* Landscape orientation adjustments for small screens */
+@media screen and (max-width: 992px) and (orientation: landscape) {
+    .header .container {
+        flex-wrap: nowrap;
+    }
+
+    .header-text {
+        font-size: 16px;
+        padding: 0 10px;
+    }
+
+    .header-contacts {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .header-contacts .phone {
+        margin: 0 15px 0 0;
+        font-size: 16px;
+    }
+
+    .mobile-menu-toggle {
+        display: none;
+    }
+
+    .navbar-menu {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .main {
+        padding: 60px 0;
+    }
+
+    .main h1 {
+        font-size: 1.6rem;
+    }
 }
 
