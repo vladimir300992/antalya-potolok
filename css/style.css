@@ -47,13 +47,29 @@ body {
 }
 
 .logo-img {
-    height: 105px;
+    height: 70px;
     width: auto;
     transition: transform 0.3s;
 }
 
 .logo-img:hover {
     transform: scale(1.05);
+}
+
+/* Центральный текст */
+.header-text {
+    flex: 1;
+    text-align: center;
+    padding: 0 20px;
+    font-size: 18px;
+    color: #555;
+    margin: 10px 0;
+}
+
+.emoji {
+    font-size: 20px;
+    vertical-align: middle;
+    margin-left: 5px;
 }
 
 /* Контакты */
@@ -635,6 +651,9 @@ body {
 
 /* Адаптация для мобильных */
 @media (max-width: 992px) {
+    .header-text {
+        display: none;
+    }
 
     .header-contacts {
         flex-direction: row;
@@ -664,12 +683,15 @@ body {
     }
 
     .mobile-menu-toggle {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        display: block;
     }
 
     .navbar-menu {
+        display: none;
+        flex-direction: column;
+    }
+
+    .navbar-menu.show {
         display: flex;
     }
 
@@ -985,10 +1007,15 @@ body {
 
         /* Мобильная навигация */
         .mobile-menu-toggle {
-            display: none;
+            display: block;
         }
 
         .navbar-menu {
+            display: none;
+            flex-direction: column;
+        }
+
+        .navbar-menu.show {
             display: flex;
         }
 
@@ -1012,6 +1039,9 @@ body {
             margin-bottom: 10px;
         }
 
+        .header-text {
+            display: none;
+        }
 
         .header-contacts {
             flex-direction: row;
@@ -1284,8 +1314,16 @@ body {
 /* Дополнительные стили для улучшений                                */
 /* ------------------------------------------------------------------ */
 
-/* Ранее здесь скрывалась мобильная кнопка и принудительно показывалось меню.
-   Эти стили удалены, чтобы позволить адаптивное мобильное меню. */
+/* Всегда отображаем горизонтальное меню и скрываем мобильную кнопку */
+.mobile-menu-toggle {
+    display: none !important;
+}
+
+/* Навигационное меню всегда в одну строку */
+.navbar-menu {
+    display: flex !important;
+    flex-direction: row !important;
+}
 
 /* Уточняем размер Instagram-кнопки в отзывах */
 .instagram-link {
@@ -1347,7 +1385,25 @@ body {
     font-weight: 500;
 }
 
-/* Удалена прежняя горизонтальная адаптация меню для узких экранов */
+/* Адаптация горизонтального меню для узких экранов */
+@media (max-width: 768px) {
+    /* делаем список горизонтальным и скролируемым */
+    .navbar-menu {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    /* элементы не растягиваются по ширине */
+    .navbar-menu li {
+        flex: 0 0 auto;
+        text-align: center;
+    }
+    .navbar-menu a {
+        padding: 12px 10px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+}
 
 /* ------------------------------------------------------------------ */
 /* Contact page (kontakty.html)                                       */
@@ -1367,38 +1423,37 @@ body {
 }
 
 /* ----------------------------------------------------------
- * Адаптивное мобильное меню с анимацией выезда
- * ---------------------------------------------------------- */
+ * Custom overrides for responsive navigation
+ *
+ * The original design hid the navigation menu on narrow screens and
+ * relied on a hamburger icon.  For this project the client wants
+ * the menu links to be always visible, even on mobile devices.  The
+ * following media query overrides the earlier rules by forcing the
+ * menu to display as a flexible row that wraps when necessary.  It
+ * also hides the mobile menu toggle completely.
+ */
 @media (max-width: 992px) {
+    /* Hide the burger button entirely */
     .mobile-menu-toggle {
-        display: flex !important;
-        justify-content: space-between;
-        align-items: center;
+        display: none !important;
     }
+    /* Display the menu items in a flex container that wraps */
     .navbar-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
+        display: flex !important;
+        flex-direction: row;
+        flex-wrap: wrap;
         width: 100%;
-        background: #4C4C4CE5;
-        flex-direction: column;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
     }
-    .navbar-menu.show {
-        max-height: 500px;
+    /* Each menu item takes half of the row on very small screens */
+    .navbar-menu li {
+        flex: 1 1 50%;
+        text-align: center;
     }
-    .mobile-menu-toggle .icon-bar {
-        transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-    .mobile-menu-toggle.open .icon-bar:nth-child(1) {
-        transform: translateY(6px) rotate(45deg);
-    }
-    .mobile-menu-toggle.open .icon-bar:nth-child(2) {
-        opacity: 0;
-    }
-    .mobile-menu-toggle.open .icon-bar:nth-child(3) {
-        transform: translateY(-6px) rotate(-45deg);
+    /* Reduce padding and font-size for small screens */
+    .navbar-menu a {
+        padding: 12px 8px;
+        font-size: 15px;
     }
 }
+
+        }
