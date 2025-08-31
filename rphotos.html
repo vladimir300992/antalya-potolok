@@ -61,23 +61,23 @@
             <h1 class="page-title">Наши работы</h1>
             <p class="section-subtitle">Мы устанавливаем натяжные потолки в помещениях любого типа. Выберите категорию ниже, чтобы посмотреть примеры работ и узнать, как потолки выглядят в разных интерьерах.</p>
             <div class="room-grid">
-                <div class="room-item">
+                <div class="room-item" data-category="bathroom">
                     <img src="img/gallery1.png" alt="Натяжные потолки в ванной">
                     <h4>Ванные комнаты</h4>
                 </div>
-                <div class="room-item">
+                <div class="room-item" data-category="bedroom">
                     <img src="img/gallery2.png" alt="Натяжные потолки в спальне">
                     <h4>Спальни</h4>
                 </div>
-                <div class="room-item">
+                <div class="room-item" data-category="kitchen">
                     <img src="img/gallery3.png" alt="Натяжные потолки на кухне">
                     <h4>Кухни</h4>
                 </div>
-                <div class="room-item">
+                <div class="room-item" data-category="living">
                     <img src="img/gallery1.png" alt="Натяжные потолки в гостиной">
                     <h4>Гостиные</h4>
                 </div>
-                <div class="room-item">
+                <div class="room-item" data-category="kids">
                     <img src="img/gallery2.png" alt="Натяжные потолки в детской">
                     <h4>Детские комнаты</h4>
                 </div>
@@ -117,6 +117,14 @@
         </div>
     </footer>
 
+    <!-- Модальное окно галереи -->
+    <div class="gallery-modal" id="galleryModal">
+        <span class="gallery-close">&times;</span>
+        <div class="gallery-content"></div>
+        <button class="gallery-prev" aria-label="Предыдущее изображение">&#10094;</button>
+        <button class="gallery-next" aria-label="Следующее изображение">&#10095;</button>
+    </div>
+
     <!-- Модальное окно -->
     <div class="modal" id="modal">
         <div class="modal-content">
@@ -138,5 +146,6 @@
 
     <script src="js/components.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/gallery.js"></script>
 </body>
 </html>
