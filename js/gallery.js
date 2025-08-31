@@ -2,11 +2,11 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     const galleries = {
-        bathroom: ['img/bathroom1.jpg', 'img/bathroom2.png', 'img/bathroom3.jpg','img/bathroom4.jpg','img/bathroom5.jpg'],
-        bedroom: ['img/bedroom1.jpg', 'img/bedroom2.png', 'img/bedroom3.jpg','img/bedroom4.jpg','img/bedroom5.jpg'],
-        kitchen: ['img/kitchen1.jpg', 'img/kitchen2.png', 'img/kitchen3.jpg','img/kitchen4.jpg','img/kitchen5.jpg'],
-        living: ['img/living1.jpg', 'img/living2.png', 'img/living3.png', 'img/living4.png', 'img/living5.png'],
-        kids: ['img/kids1.png', 'img/kids2.png', 'img/kids3.jpg','img/kids4.jpg','img/kids4.jpg']
+        bathroom: ['img/bathroom1.png', 'img/bathroom2.png', 'img/bathroom3.png','img/bathroom4.png','img/bathroom5.png'],
+        bedroom: ['img/bedroom1.png', 'img/bedroom2.png', 'img/bedroom3.png','img/bedroom4.png','img/bedroom5.png'],
+        kitchen: ['img/kitchen1.png', 'img/kitchen2.png', 'img/kitchen3.png','img/kitchen4.png','img/kitchen5.png'],
+        living: ['img/living1.png', 'img/living2.png', 'img/living3.png', 'img/living4.png', 'img/living5.png'],
+        kids: ['img/kids1.png', 'img/kids2.png', 'img/kids3.png','img/kids4.png','img/kids4.png']
     };
 
     const modal = document.getElementById('galleryModal');
