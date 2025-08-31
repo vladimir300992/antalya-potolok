@@ -2,11 +2,11 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     const galleries = {
-        bathroom: ['img/gallery1.jpg', 'img/gallery1.png', 'img/unsplash1.jpg'],
-        bedroom: ['img/gallery2.png', 'img/gallery3.png', 'img/gallery1.jpg'],
-        kitchen: ['img/gallery3.png', 'img/gallery1.png', 'img/gallery2.png'],
-        living: ['img/unsplash1.jpg', 'img/gallery2.png', 'img/gallery3.png'],
-        kids: ['img/gallery1.png', 'img/gallery3.png', 'img/gallery1.jpg']
+        bathroom: ['img/bathroom1.jpg', 'img/bathroom2.png', 'img/bathroom3.jpg','img/bathroom4.jpg','img/bathroom5.jpg'],
+        bedroom: ['img/bedroom1.jpg', 'img/bedroom2.png', 'img/bedroom3.jpg','img/bedroom4.jpg','img/bedroom5.jpg'],
+        kitchen: ['img/kitchen1.jpg', 'img/kitchen2.png', 'img/kitchen3.jpg','img/kitchen4.jpg','img/kitchen5.jpg'],
+        living: ['img/living1.jpg', 'img/living2.png', 'img/living3.png', 'img/living4.png', 'img/living5.png'],
+        kids: ['img/kids1.png', 'img/kids2.png', 'img/kids3.jpg','img/kids4.jpg','img/kids4.jpg']
     };
 
     const modal = document.getElementById('galleryModal');
