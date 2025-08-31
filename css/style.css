@@ -712,18 +712,7 @@ img {
     font-size: 1.8rem;
   }
 
-  .mobile-menu-toggle {
-    display: block;
-  }
-
-  .navbar-menu {
-    display: none;
-    flex-direction: column;
-  }
-
-  .navbar-menu.show {
-    display: flex;
-  }
+    /* Navigation menu rules moved to dedicated block below */
 
   .about-header {
     flex-direction: column;
@@ -1035,59 +1024,12 @@ img {
   font-size: 1rem;
 }
 
-/* Мобильная навигация */
-.mobile-menu-toggle {
-  display: block;
-}
-
-.navbar-menu {
-  display: none;
-  flex-direction: column;
-}
-
-.navbar-menu.show {
-  display: flex;
-}
-
-.navbar-menu li {
-  width: 100%;
-  text-align: left;
-}
-
-.navbar-menu a {
-  padding: 12px 15px;
-}
-
-/* Адаптация шапки */
-.header .container {
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo {
-  width: auto;
-  text-align: left;
-  margin-bottom: 0;
-}
-
-.header-text {
-  display: none;
-}
-
-.header-contacts {
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 5px;
-  width: auto;
-  justify-content: center;
-  margin-top: 0;
-}
-
-.phone {
-  font-size: 16px;
-}
+/*
+   The block of mobile navigation and header adaptation rules that applied
+   globally caused the desktop menu to render vertically. These rules are now
+   handled within responsive media queries further below, so the global styles
+   are removed to restore the default horizontal menu on desktop.
+*/
 
 /* Стили для формы отзыва */
 .rating-stars {
@@ -1430,7 +1372,14 @@ img {
 /* Обновляем медиа-запросы для навигационного меню */
 @media (max-width: 992px) {
   .mobile-menu-toggle {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu-icon {
+    float: none;
+    margin-top: 5px;
   }
 
   .navbar-menu {
@@ -1484,6 +1433,7 @@ img {
 
   .navbar-menu {
     display: flex !important;
+    flex-direction: row;
   }
 }
 
