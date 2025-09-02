@@ -13,20 +13,31 @@ document.addEventListener('DOMContentLoaded', () => {
             track.style.transform = `translateX(-${i * 100}%)`;
         }
 
-        let intervalId;
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    intervalId = setInterval(() => {
-                        index = (index + 1) % total;
-                        showSlide(index);
-                    }, 3000);
-                } else {
-                    clearInterval(intervalId);
-                }
-            });
-        }, { threshold: 0.5 });
+        function startAuto() {
+            return setInterval(() => {
+                index = (index + 1) % total;
+                showSlide(index);
+            }, 3000);
+        }
 
-        observer.observe(carousel);
+        let intervalId;
+        const isDesktop = window.matchMedia('(min-width: 993px)').matches;
+
+        if ('IntersectionObserver' in window && !isDesktop) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (!intervalId) intervalId = startAuto();
+                    } else {
+                        clearInterval(intervalId);
+                        intervalId = null;
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(carousel);
+        } else {
+            intervalId = startAuto();
+        }
     });
 });

@@ -1353,6 +1353,19 @@ img {
   border-radius: 10px;
 }
 
+@media (max-width: 576px) {
+  .carousel {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .carousel-track img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+}
+
 
 /* ------------------------------------------------------------------ */
 /* Contact page (kontakty.html)                                       */
