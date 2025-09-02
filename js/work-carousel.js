@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const offRight = width + sideWidth;
             const offLeft = -sideWidth;
 
+            track.style.height = `${activeWidth}px`;
+
             const prev = (index - 1 + total) % total;
             const next = (index + 1) % total;
             const prevPrev = (index - 2 + total) % total;
@@ -26,28 +28,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 slide.style.position = 'absolute';
                 slide.style.top = '50%';
                 slide.style.left = '0';
-                slide.style.height = '100%';
                 slide.style.objectFit = 'cover';
-                slide.style.transition = 'transform 0.5s ease, width 0.5s ease';
+                slide.style.transition = 'transform 0.5s ease, width 0.5s ease, height 0.5s ease';
 
                 if (i === index) {
                     slide.style.width = `${activeWidth}px`;
+                    slide.style.height = `${activeWidth}px`;
                     slide.style.transform = `translate(${activeLeft}px, -50%)`;
                     slide.style.zIndex = 2;
                 } else if (i === prev) {
                     slide.style.width = `${sideWidth}px`;
+                    slide.style.height = `${sideWidth}px`;
                     slide.style.transform = `translate(0px, -50%)`;
                     slide.style.zIndex = 1;
                 } else if (i === next) {
                     slide.style.width = `${sideWidth}px`;
+                    slide.style.height = `${sideWidth}px`;
                     slide.style.transform = `translate(${nextLeft}px, -50%)`;
                     slide.style.zIndex = 1;
                 } else if (i === prevPrev) {
                     slide.style.width = `${sideWidth}px`;
+                    slide.style.height = `${sideWidth}px`;
                     slide.style.transform = `translate(${offLeft}px, -50%)`;
                     slide.style.zIndex = 0;
                 } else {
                     slide.style.width = `${sideWidth}px`;
+                    slide.style.height = `${sideWidth}px`;
                     slide.style.transform = `translate(${offRight}px, -50%)`;
                     slide.style.zIndex = 0;
                 }
@@ -64,9 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let intervalId;
         update();
 
-        const isDesktop = window.matchMedia('(min-width: 993px)').matches;
-
-        if ('IntersectionObserver' in window && !isDesktop) {
+        if ('IntersectionObserver' in window) {
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
