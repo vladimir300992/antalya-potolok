@@ -396,16 +396,17 @@ img {
 /* Кнопки */
   .calculator-actions {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
     gap: 15px;
     margin-top: 30px;
-    justify-content: center;
   }
 
-  .calc-item {
+  .calc-buttons {
     display: flex;
+    gap: 15px;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
   }
 
   .calc-label {
@@ -421,8 +422,8 @@ img {
   }
 
   .calc-icon {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
   }
 
 .btn {
@@ -782,10 +783,12 @@ img {
 
     .calculator-actions {
       flex-direction: column;
+      gap: 15px;
     }
 
-    .calc-item {
+    .calc-buttons {
       flex-direction: column;
+      width: 100%;
     }
 
     .calc-label {
