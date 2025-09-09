@@ -27,6 +27,8 @@ function initCommonComponents() {
             const href = item.getAttribute('href');
             if (href === currentPage) {
                 item.parentElement.classList.add('active');
+                item.removeAttribute('href');
+                item.setAttribute('aria-current', 'page');
             }
         });
     }
