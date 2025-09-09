@@ -393,13 +393,6 @@ img {
   object-fit: contain;
 }
 
-.section-link-img {
-  width: 24px;
-  height: 24px;
-  margin-left: 8px;
-  vertical-align: middle;
-}
-
 /* Кнопки */
   .calculator-actions {
     display: grid;
