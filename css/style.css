@@ -456,9 +456,12 @@ img {
     }
   }
 
-  .calc-text {
-    font-size: 14px;
-  }
+    .calc-text {
+      font-size: 14px;
+      margin: 0;
+      text-align: center;
+      line-height: 1.4;
+    }
 
   .calc-icon {
     width: 100px;
