@@ -431,10 +431,10 @@ img {
 
   .calc-label {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    text-align: center;
-    gap: 8px;
+    text-align: left;
+    gap: 16px;
   }
 
   .main-highlights .calc-label {
@@ -451,8 +451,6 @@ img {
     }
 
     .calc-label--eco {
-      align-items: flex-start;
-      text-align: left;
       justify-self: start;
     }
   }
@@ -464,11 +462,12 @@ img {
   .calc-icon {
     width: 100px;
     height: 100px;
+    flex-shrink: 0;
   }
 
   .bauf-logo {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
   }
 
 .btn {
@@ -839,7 +838,11 @@ img {
     }
 
     .calc-label {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
       justify-content: center;
+      gap: 12px;
     }
 
   .radio-group {
