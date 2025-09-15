@@ -379,7 +379,7 @@ img {
 .benefits-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   max-width: 300px;
   display: block;
 }
@@ -409,7 +409,7 @@ img {
   }
 
   .main-highlights .benefits-list {
-    justify-self: start;
+    justify-self: center;
   }
 }
 
