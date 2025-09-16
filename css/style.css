@@ -376,6 +376,20 @@ img {
   justify-items: center;
 }
 
+.feature-cards {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+  justify-items: center;
+  align-items: start;
+}
+
+@media (min-width: 576px) {
+  .feature-cards {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
 .benefits-list {
   list-style: none;
   padding: 0;
@@ -402,17 +416,6 @@ img {
   object-fit: contain;
 }
 
-@media (min-width: 992px) {
-  .main-highlights {
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center;
-  }
-
-  .main-highlights .benefits-list {
-    justify-self: center;
-  }
-}
-
 /* Кнопки */
   .calculator-actions {
     display: flex;
@@ -436,32 +439,22 @@ img {
     text-align: center;
     justify-content: center;
     gap: 12px;
+    width: 100%;
+    max-width: 260px;
   }
 
-  .main-highlights .calc-label {
-    align-self: center;
+  .calc-text {
+    font-size: 14px;
+    margin: 0;
+    text-align: center;
+    line-height: 1.4;
   }
 
-  .calc-label--eco {
-    max-width: 280px;
+  .calc-label--eco,
+  .calc-label--bauf,
+  .calc-label--certificates {
+    justify-self: center;
   }
-
-  @media (min-width: 992px) {
-    .calc-label--bauf {
-      justify-self: end;
-    }
-
-    .calc-label--eco {
-      justify-self: start;
-    }
-  }
-
-    .calc-text {
-      font-size: 14px;
-      margin: 0;
-      text-align: center;
-      line-height: 1.4;
-    }
 
   .calc-icon {
     width: 100px;
