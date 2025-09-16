@@ -7,7 +7,7 @@
     <meta name="description" content="Натяжные потолки в Анталии и курортах Кемер, Белек, Сиде и Манавгат. Монтаж под ключ, расчёт стоимости онлайн, гарантия 10 лет.">
     <meta name="keywords" content="натяжные потолки Анталия, натяжной потолок Анталия под ключ, монтаж натяжных потолков в Анталии, установщик натяжных потолков Анталия, натяжные потолки Алания, натяжные потолки Белек, натяжные потолки Кемер, натяжные потолки Сиде, натяжные потолки Манавгат, бригада натяжных потолков Анталия, фирма по натяжным потолкам в Белеке, натяжные потолки Лара, натяжные потолки Коньяалты, натяжные потолки Кепез, натяжные потолки цены Анталия, натяжные потолки недорого Анталия, потолки эконом-класс Анталия, потолки премиум Анталия, потолки под ключ стоимость, установка потолков рассрочка, потолочные светильники Анталия, световые линии в потолке, теневые потолки Анталия, подвесные потолки Анталия, шумоизоляция потолка Анталия, малярные работы Анталия, электрика и освещение Анталия, трековое освещение Анталия, двухуровневые потолки Анталия, потолочный плинтус установка, как выбрать натяжной потолок в Анталии">
     <!-- Добавляем параметр версии для предотвращения кэширования CSS -->
-    <link rel="stylesheet" href="css/style.css?v=3">
+    <link rel="stylesheet" href="css/style.css?v=4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
@@ -84,6 +84,20 @@
         <div class="container">
             <h1>Натяжные потолки в Анталии <br> <span> от 20$ за м² под ключ</span> <br> Работаем по всему региону!</h1>
             <div class="main-highlights">
+                <div class="feature-cards">
+                    <div class="calc-label calc-label--eco">
+                        <img src="img/eco-friendly.png" alt="Eco-friendly значок" class="calc-icon">
+                        <p class="calc-text">Абсолютно безопасно и экологично</p>
+                    </div>
+                    <div class="calc-label calc-label--bauf">
+                        <img src="img/bauf.svg" alt="BAUF логотип" class="calc-icon bauf-logo">
+                        <p class="calc-text">Немецкое качество</p>
+                    </div>
+                    <div class="calc-label calc-label--certificates">
+                        <img src="img/checkmark.svg" alt="Европейские сертификаты" class="calc-icon">
+                        <p class="calc-text">Европейские сертификаты</p>
+                    </div>
+                </div>
                 <ul class="benefits-list">
                     <li data-aos="zoom-in" data-aos-delay="150">
                         <img src="img/checkmark.svg" alt="Немецкие полотна BAUF" class="check-icon">
@@ -107,20 +121,6 @@
                     </li>
                 </ul>
             </div>
-            <div class="feature-cards">
-                    <div class="calc-label calc-label--eco">
-                        <img src="img/eco-friendly.png" alt="Eco-friendly значок" class="calc-icon">
-                        <p class="calc-text">Абсолютно безопасно и экологично</p>
-                    </div>
-                    <div class="calc-label calc-label--bauf">
-                        <img src="img/bauf.svg" alt="BAUF логотип" class="calc-icon bauf-logo">
-                        <p class="calc-text">Немецкое качество</p>
-                    </div>
-                    <div class="calc-label calc-label--certificates">
-                        <img src="img/checkmark.svg" alt="Европейские сертификаты" class="calc-icon">
-                        <p class="calc-text">Европейские сертификаты</p>
-                    </div>
-                </div>
             <div class="calculator-actions" data-aos="zoom-in" data-aos-delay="400">
                 <div class="calc-buttons">
                     <button class="btn" id="scrollToCalculator">Расчитать стоимость</button>
@@ -166,6 +166,13 @@
                     <label><input type="radio" name="profile" value="standard" checked> Стандартный <a href="potolki.html#standard-profile">(подробнее)</a></label>
                     <label><input type="radio" name="profile" value="shadow"> Теневой <a href="potolki.html#shadow-profile">(подробнее)</a></label>
                 </div>
+            </div>
+
+            <!-- Дополнительная опция: сверление плитки -->
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="tileDrilling" /> Сверление плитки
+                </label>
             </div>
 
             <!-- Кнопка и результат -->
