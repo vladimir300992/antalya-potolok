@@ -444,7 +444,7 @@ img {
   }
 
   .calc-text {
-    font-size: 14px;
+    font-size: 18px;
     margin: 0;
     text-align: center;
     line-height: 1.4;
@@ -464,7 +464,8 @@ img {
 
   .bauf-logo {
     width: 200px;
-    height: 200px;
+    height: 75px;
+    margin-top: 22px;
   }
 
 .btn {
@@ -514,6 +515,7 @@ img {
 
 .form-group {
   margin-bottom: 25px;
+  margin-left: 10px;
 }
 
 .form-group label {
@@ -611,7 +613,7 @@ img {
   color: white;
   padding: 8px 20px;
   border-radius: 30px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   display: inline-block;
   margin: 15px 0;

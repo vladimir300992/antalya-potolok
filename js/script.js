@@ -5,15 +5,19 @@ function calculatePrice() {
     const area = parseFloat(document.getElementById('area').value) || 0;
     const lights = parseInt(document.getElementById('lights').value) || 0;
     const profileType = document.querySelector('input[name="profile"]:checked').value;
+    const tiles = document.getElementById('tileDrilling');
 
     // Расчет стоимости
+
     let price = perimeter * 7.4 + area * 18 + lights * 10;
 
     // Надбавка за теневой профиль
     if (profileType === 'shadow') {
         price += 20 + (perimeter * 1.6);
     }
-
+    if (tiles.checked) {
+         price += perimeter * 6;
+    }
     // Округление до 10
     price = Math.round(price / 10) * 10;
 
@@ -24,10 +28,10 @@ function calculatePrice() {
     // Отображаем результат с анимацией
     const result = document.getElementById('calcResult');
     result.innerHTML = `
-        <div style="margin-bottom: 15px; font-size: 18px; font-weight: 500;">Стоимость по заданным параметрам:</div>
+        <div style="margin-bottom: 15px; font-size: 18px; font-weight: 500;"> Стоимость по заданным параметрам:</div>
         <div class="price-container">
             <div class="old-price-wrapper">
-                <span class="old-price">${price} $</span>
+                <div class="old-price">${price} $ </div>
             </div>
             <div class="discount-badge">Ваша скидка 10%: -${discount} $</div>
             <div class="new-price">Итого: ${finalPrice} $</div>
