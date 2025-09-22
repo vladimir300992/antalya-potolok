@@ -1450,14 +1450,14 @@ img {
 }
 
 @media (max-width: 576px) {
-  .carousel {
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+  .work-section .carousel {
+    width: 100vw;
+    max-width: none;
+    margin-left: calc((100% - 100vw) / 2);
   }
 
   .carousel-track {
-    height: 300px;
+    height: auto;
   }
 }
 
