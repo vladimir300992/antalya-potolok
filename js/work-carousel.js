@@ -11,8 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function update() {
             const width = carousel.clientWidth;
-            const activeWidth = width * 0.5;
-            const sideWidth = width * 0.2;
+            const isMobile = window.innerWidth <= 576;
+            const activeRatio = isMobile ? 0.7 : 0.5;
+            const sideRatio = isMobile ? 0.15 : 0.2;
+            const activeWidth = width * activeRatio;
+            const sideWidth = width * sideRatio;
             const activeLeft = (width - activeWidth) / 2;
             const nextLeft = width - sideWidth;
             const offRight = width + sideWidth;
