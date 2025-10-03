@@ -12,52 +12,62 @@ document.addEventListener('DOMContentLoaded', () => {
         function update() {
             const width = carousel.clientWidth;
             const isMobile = window.innerWidth <= 576;
-            const activeRatio = isMobile ? 0.7 : 0.5;
-            const sideRatio = isMobile ? 0.15 : 0.2;
-            const activeWidth = width * activeRatio;
-            const sideWidth = width * sideRatio;
-            const activeLeft = (width - activeWidth) / 2;
-            const nextLeft = width - sideWidth;
-            const offRight = width + sideWidth;
-            const offLeft = -sideWidth;
+            const activeRatio = isMobile ? 0.9 : 0.6;
+            const maxActive = isMobile ? 360 : 420;
+            const minActive = 220;
+            const cappedMax = Math.min(maxActive, width);
+            const cappedMin = Math.min(minActive, width);
+            const targetSize = width * activeRatio;
+            const activeSize = Math.max(Math.min(targetSize, cappedMax), cappedMin);
+            const sideSize = activeSize * (isMobile ? 0.7 : 0.55);
+            const centerLeft = (width - activeSize) / 2;
+            const gap = Math.max(width * 0.05, 16);
+            const offLeft = -sideSize - gap;
+            const offRight = width + gap;
 
-            track.style.height = `${activeWidth}px`;
+            track.style.height = `${activeSize}px`;
 
             const prev = (index - 1 + total) % total;
-            const next = (index + 1) % total;
             const prevPrev = (index - 2 + total) % total;
+            const next = (index + 1) % total;
 
             slides.forEach((slide, i) => {
                 slide.style.position = 'absolute';
                 slide.style.top = '50%';
                 slide.style.left = '0';
                 slide.style.objectFit = 'cover';
-                slide.style.transition = 'transform 0.5s ease, width 0.5s ease, height 0.5s ease';
+                slide.style.transition = 'transform 0.6s ease, width 0.6s ease, height 0.6s ease, opacity 0.6s ease';
+                slide.style.borderRadius = '10px';
 
                 if (i === index) {
-                    slide.style.width = `${activeWidth}px`;
-                    slide.style.height = `${activeWidth}px`;
-                    slide.style.transform = `translate(${activeLeft}px, -50%)`;
+                    slide.style.width = `${activeSize}px`;
+                    slide.style.height = `${activeSize}px`;
+                    slide.style.transform = `translate(${centerLeft}px, -50%)`;
+                    slide.style.opacity = '1';
                     slide.style.zIndex = 2;
                 } else if (i === prev) {
-                    slide.style.width = `${sideWidth}px`;
-                    slide.style.height = `${sideWidth}px`;
-                    slide.style.transform = `translate(0px, -50%)`;
+                    slide.style.width = `${sideSize}px`;
+                    slide.style.height = `${sideSize}px`;
+                    slide.style.transform = `translate(${offLeft}px, -50%)`;
+                    slide.style.opacity = '0.4';
                     slide.style.zIndex = 1;
                 } else if (i === next) {
-                    slide.style.width = `${sideWidth}px`;
-                    slide.style.height = `${sideWidth}px`;
-                    slide.style.transform = `translate(${nextLeft}px, -50%)`;
+                    slide.style.width = `${sideSize}px`;
+                    slide.style.height = `${sideSize}px`;
+                    slide.style.transform = `translate(${offRight}px, -50%)`;
+                    slide.style.opacity = '0.4';
                     slide.style.zIndex = 1;
                 } else if (i === prevPrev) {
-                    slide.style.width = `${sideWidth}px`;
-                    slide.style.height = `${sideWidth}px`;
+                    slide.style.width = `${sideSize}px`;
+                    slide.style.height = `${sideSize}px`;
                     slide.style.transform = `translate(${offLeft}px, -50%)`;
+                    slide.style.opacity = '0';
                     slide.style.zIndex = 0;
                 } else {
-                    slide.style.width = `${sideWidth}px`;
-                    slide.style.height = `${sideWidth}px`;
+                    slide.style.width = `${sideSize}px`;
+                    slide.style.height = `${sideSize}px`;
                     slide.style.transform = `translate(${offRight}px, -50%)`;
+                    slide.style.opacity = '0';
                     slide.style.zIndex = 0;
                 }
             });
