@@ -51,8 +51,8 @@ function calculatePrice() {
     document.getElementById('clientForm').style.display = 'block';
 }
 
-// Функция отправки данных в Google Sheets
-function sendToGoogleSheets() {
+// Функция отправки данных в Telegram
+async function sendCalculationToTelegram() {
     const name = document.getElementById('name').value;
     const phone = document.getElementById('phone').value;
     const perimeter = document.getElementById('perimeter').value;
@@ -60,42 +60,71 @@ function sendToGoogleSheets() {
     const lights = document.getElementById('lights').value;
     const canvasType = document.querySelector('input[name="canvas"]:checked').value;
     const profileType = document.querySelector('input[name="profile"]:checked').value;
+    const tileDrilling = document.getElementById('tileDrilling').checked;
 
     // Получаем рассчитанные значения
-    const resultText = document.getElementById('calcResult').innerText;
+    const resultBox = document.getElementById('calcResult');
+    const resultText = resultBox ? resultBox.innerText.trim() : '';
 
-    // URL вашего Google Apps Script
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbyJzWQg56r4y5e3MH6DWRfdlOvNjdE5BvUqOn2DnOintOCbx1goMcOMdYiYgMEHPPj73A/exec';
+    if (!resultText) {
+        alert('Пожалуйста, сначала рассчитайте стоимость.');
+        return;
+    }
 
-    // Отправляем данные
-    fetch(scriptUrl, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            name: name,
-            phone: phone,
-            perimeter: perimeter,
-            area: area,
-            lights: lights,
-            canvasType: canvasType,
-            profileType: profileType,
-            calculation: resultText,
-            timestamp: new Date().toLocaleString()
-        })
-    })
-    .then(() => {
+    const TELEGRAM_TOKEN = '1403690168:AAHqRNU27X5THfsdASyZHMHdWwHX9d5SZcs';
+    const TELEGRAM_CHAT_ID = '335094318';
+
+    const canvasTypeLabel = canvasType === 'glossy' ? 'Глянцевый' : 'Матовый';
+    const profileTypeLabel = profileType === 'shadow' ? 'Теневой' : 'Стандартный';
+
+    const messageParts = [
+        '🔔 Новая заявка с сайта',
+        '',
+        `Имя: ${name || 'не указано'}`,
+        `Телефон: ${phone || 'не указан'}`,
+        '',
+        'Параметры расчёта:',
+        `• Площадь: ${area || '—'} м²`,
+        `• Периметр: ${perimeter || '—'} м`,
+        `• Светильники: ${lights || '0'} шт.`,
+        `• Тип полотна: ${canvasTypeLabel}`,
+        `• Тип профиля: ${profileTypeLabel}`,
+        `• Сверление плитки: ${tileDrilling ? 'Да' : 'Нет'}`,
+        '',
+        'Результат расчёта:',
+        resultText,
+        '',
+        `Отправлено: ${new Date().toLocaleString()}`
+    ];
+
+    const message = messageParts.join('\n');
+
+    try {
+        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message
+            })
+        });
+
+        const result = await response.json();
+
+        if (!result.ok) {
+            throw new Error(result.description || 'Ошибка Telegram API');
+        }
+
         alert('Спасибо! Мы скоро с вами свяжемся.');
         document.getElementById('calcForm').reset();
         document.getElementById('calcResult').style.display = 'none';
         document.getElementById('clientForm').style.display = 'none';
-    })
-    .catch(error => {
+    } catch (error) {
         console.error('Error:', error);
         alert('Произошла ошибка. Пожалуйста, позвоните нам напрямую.');
-    });
+    }
 }
 
 // Инициализация калькулятора
