@@ -57,12 +57,14 @@ function initCommonComponents() {
 
     // Инициализация модального окна
     const modal = document.getElementById('modal');
-    const openModalBtn = document.getElementById('openModal');
+    const openModalButtons = document.querySelectorAll('[data-open-modal]');
     const closeBtn = document.querySelector('.close');
 
-    if (openModalBtn) {
-        openModalBtn.addEventListener('click', () => {
-            modal.style.display = 'flex';
+    if (modal && openModalButtons.length > 0) {
+        openModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                modal.style.display = 'flex';
+            });
         });
     }
 
@@ -73,7 +75,7 @@ function initCommonComponents() {
     }
 
     window.addEventListener('click', (e) => {
-        if (e.target === modal) {
+        if (modal && e.target === modal) {
             modal.style.display = 'none';
         }
     });
