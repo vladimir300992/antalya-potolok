@@ -149,14 +149,14 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h3>Оставьте заявку</h3>
-            <form>
+            <form class="modal-form" data-telegram-form data-form-source="Модальная форма">
                 <div class="form-group">
                     <label for="modal-name">Ваше имя</label>
-                    <input type="text" id="modal-name" placeholder="Ваше имя" required>
+                    <input type="text" id="modal-name" name="name" placeholder="Ваше имя" required>
                 </div>
                 <div class="form-group">
                     <label for="modal-phone">Телефон</label>
-                    <input type="tel" id="modal-phone" placeholder="Телефон" required>
+                    <input type="tel" id="modal-phone" name="phone" placeholder="Телефон" required>
                 </div>
                 <button type="submit" class="btn">Отправить</button>
             </form>

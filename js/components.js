@@ -1,3 +1,16 @@
+const TELEGRAM_CONFIG = window.TELEGRAM_CONFIG || {
+    token: '1403690168:AAHqRNU27X5THfsdASyZHMHdWwHX9d5SZcs',
+    chatId: '335094318'
+};
+
+window.TELEGRAM_CONFIG = TELEGRAM_CONFIG;
+
+const TELEGRAM_FIELD_LABELS = {
+    name: 'Имя',
+    phone: 'Телефон',
+    message: 'Комментарий'
+};
+
 // Функция инициализации общих компонентов
 function initCommonComponents() {
     // Инициализация мобильного меню
@@ -88,6 +101,8 @@ function initCommonComponents() {
             e.target.value = !x[2] ? x[1] : x[1] + ' ' + x[2] + (x[3] ? ' ' + x[3] : '');
         });
     }
+
+    initTelegramForms();
 }
 
 // Обновляем функцию инициализации мобильного меню
@@ -115,4 +130,106 @@ function initMobileMenu() {
             menuToggle.classList.remove('open');
         });
     }
+}
+
+async function sendTelegramLead(form) {
+    const { token, chatId } = window.TELEGRAM_CONFIG || {};
+
+    if (!token || !chatId) {
+        throw new Error('Не настроены параметры Telegram.');
+    }
+
+    const formData = new FormData(form);
+    const entries = [];
+
+    formData.forEach((value, key) => {
+        const stringValue = String(value).trim();
+        if (!stringValue) {
+            return;
+        }
+
+        const fieldElement = form.querySelector(`[name="${key}"]`);
+        const label = fieldElement?.dataset.label || TELEGRAM_FIELD_LABELS[key] || key;
+        entries.push(`• ${label}: ${stringValue}`);
+    });
+
+    const source = form.dataset.formSource || 'Форма заявки';
+    const pageTitle = document.title || 'Страница сайта';
+    const pageUrl = window.location.href;
+
+    const messageParts = [
+        '🔔 Новая заявка с сайта',
+        `Источник: ${source}`,
+        `Страница: ${pageTitle}`,
+        `URL: ${pageUrl}`
+    ];
+
+    if (entries.length) {
+        messageParts.push('', 'Данные клиента:', ...entries);
+    }
+
+    messageParts.push('', `Отправлено: ${new Date().toLocaleString()}`);
+
+    const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: messageParts.join('\n')
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (!result.ok) {
+        throw new Error(result.description || 'Ошибка Telegram API');
+    }
+}
+
+function initTelegramForms() {
+    const forms = document.querySelectorAll('form[data-telegram-form]');
+
+    if (!forms.length) {
+        return;
+    }
+
+    forms.forEach(form => {
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const submitButton = form.querySelector('[type="submit"]');
+            const originalText = submitButton?.textContent;
+
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = submitButton.dataset.loadingText || 'Отправляем...';
+            }
+
+            try {
+                await sendTelegramLead(form);
+                form.reset();
+
+                const modal = form.closest('.modal');
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+
+                alert('Спасибо! Мы скоро с вами свяжемся.');
+            } catch (error) {
+                console.error('Ошибка отправки формы:', error);
+                alert('Произошла ошибка. Пожалуйста, позвоните нам напрямую.');
+            } finally {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText || 'Отправить';
+                }
+            }
+        });
+    });
 }

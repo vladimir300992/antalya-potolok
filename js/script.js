@@ -71,8 +71,15 @@ async function sendCalculationToTelegram() {
         return;
     }
 
-    const TELEGRAM_TOKEN = '1403690168:AAHqRNU27X5THfsdASyZHMHdWwHX9d5SZcs';
-    const TELEGRAM_CHAT_ID = '335094318';
+    const config = window.TELEGRAM_CONFIG || {};
+    const TELEGRAM_TOKEN = config.token;
+    const TELEGRAM_CHAT_ID = config.chatId;
+
+    if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT_ID) {
+        console.error('Telegram config is missing.');
+        alert('Произошла ошибка. Пожалуйста, позвоните нам напрямую.');
+        return;
+    }
 
     const canvasTypeLabel = canvasType === 'glossy' ? 'Глянцевый' : 'Матовый';
     const profileTypeLabel = profileType === 'shadow' ? 'Теневой' : 'Стандартный';
