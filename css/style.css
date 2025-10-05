@@ -898,6 +898,50 @@ img {
   margin-right: auto;
 }
 
+/* SEO блок с дополнительным текстом */
+.seo-text {
+  padding: 60px 0;
+}
+
+.seo-text h2 {
+  font-size: 2rem;
+  color: var(--dark);
+  text-align: center;
+  margin: 0 0 20px;
+}
+
+.seo-text p {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .seo-text {
+    padding: 40px 0;
+  }
+
+  .seo-text h2 {
+    font-size: 1.6rem;
+  }
+
+  .seo-text p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .seo-text h2 {
+    font-size: 1.4rem;
+  }
+
+  .seo-text p {
+    font-size: 0.9rem;
+  }
+}
+
 .reviews-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
