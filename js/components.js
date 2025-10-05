@@ -141,8 +141,13 @@ async function sendTelegramLead(form) {
 
     const formData = new FormData(form);
     const entries = [];
+    const allowedFields = ['name', 'phone'];
 
     formData.forEach((value, key) => {
+        if (!allowedFields.includes(key)) {
+            return;
+        }
+
         const stringValue = String(value).trim();
         if (!stringValue) {
             return;
@@ -150,25 +155,12 @@ async function sendTelegramLead(form) {
 
         const fieldElement = form.querySelector(`[name="${key}"]`);
         const label = fieldElement?.dataset.label || TELEGRAM_FIELD_LABELS[key] || key;
-        entries.push(`• ${label}: ${stringValue}`);
+        entries.push(`${label}: ${stringValue}`);
     });
 
-    const source = form.dataset.formSource || 'Форма заявки';
-    const pageTitle = document.title || 'Страница сайта';
-    const pageUrl = window.location.href;
-
-    const messageParts = [
-        '🔔 Новая заявка с сайта',
-        `Источник: ${source}`,
-        `Страница: ${pageTitle}`,
-        `URL: ${pageUrl}`
-    ];
-
-    if (entries.length) {
-        messageParts.push('', 'Данные клиента:', ...entries);
+    if (!entries.length) {
+        throw new Error('Не удалось определить контактные данные.');
     }
-
-    messageParts.push('', `Отправлено: ${new Date().toLocaleString()}`);
 
     const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: 'POST',
@@ -177,7 +169,7 @@ async function sendTelegramLead(form) {
         },
         body: JSON.stringify({
             chat_id: chatId,
-            text: messageParts.join('\n')
+            text: entries.join('\n')
         })
     });
 
