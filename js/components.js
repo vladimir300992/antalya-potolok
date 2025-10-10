@@ -93,12 +93,48 @@ function initCommonComponents() {
         }
     });
 
-    // Форматирование телефона
-    const phoneInput = document.getElementById('phone');
-    if (phoneInput) {
-        phoneInput.addEventListener('input', function(e) {
-            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-            e.target.value = !x[2] ? x[1] : x[1] + ' ' + x[2] + (x[3] ? ' ' + x[3] : '');
+    // Ограничение и нормализация ввода телефона
+    const phoneInputs = document.querySelectorAll('input[type="tel"], input[name="phone"]');
+    if (phoneInputs.length) {
+        const formatPhoneValue = (value = '') => {
+            const stringValue = String(value);
+            const sanitized = stringValue.replace(/[^\d+]/g, '');
+            const digits = sanitized.replace(/\D/g, '').slice(0, 20);
+            const hasPlus = sanitized.includes('+');
+
+            if (hasPlus) {
+                return digits.length ? `+${digits}` : '+';
+            }
+
+            return digits;
+        };
+
+        const enforcePhoneFormat = (event) => {
+            const { target } = event;
+            if (!target) {
+                return;
+            }
+
+            const formattedValue = formatPhoneValue(target.value);
+            if ((event.type === 'blur' || event.type === 'change') && formattedValue === '+') {
+                target.value = '';
+                return;
+            }
+
+            target.value = formattedValue;
+        };
+
+        phoneInputs.forEach(input => {
+            if (!input.hasAttribute('inputmode')) {
+                input.setAttribute('inputmode', 'tel');
+            }
+
+            input.setAttribute('maxlength', '21');
+            input.setAttribute('pattern', '^\\+?\\d{1,20}$');
+
+            input.addEventListener('input', enforcePhoneFormat);
+            input.addEventListener('blur', enforcePhoneFormat);
+            input.addEventListener('change', enforcePhoneFormat);
         });
     }
 
