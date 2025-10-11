@@ -187,8 +187,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 answer.setAttribute('aria-hidden', 'false');
 
                 requestAnimationFrame(() => {
-                    const expandedHeight = answer.scrollHeight;
-                    answer.style.setProperty('--faq-answer-max-height', `${expandedHeight}px`);
+                    requestAnimationFrame(() => {
+                        const expandedHeight = answer.scrollHeight;
+                        answer.style.setProperty('--faq-answer-max-height', `${expandedHeight}px`);
+                    });
                 });
             } else {
                 const currentHeight = answer.scrollHeight;
@@ -197,6 +199,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 requestAnimationFrame(() => {
                     answer.classList.remove('show');
                     answer.setAttribute('aria-hidden', 'true');
+
+                    requestAnimationFrame(() => {
+                        answer.style.setProperty('--faq-answer-max-height', '0px');
+                    });
                 });
             }
         });
