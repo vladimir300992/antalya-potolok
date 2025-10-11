@@ -162,7 +162,13 @@ document.addEventListener('DOMContentLoaded', function() {
         answer.id = `faq-answer-${index}`;
 
         answer.addEventListener('transitionend', event => {
-            if (event.propertyName === 'max-height' && !answer.classList.contains('show')) {
+            if (event.propertyName !== 'max-height') {
+                return;
+            }
+
+            if (answer.classList.contains('show')) {
+                answer.style.setProperty('--faq-answer-max-height', 'none');
+            } else {
                 answer.style.setProperty('--faq-answer-max-height', '0px');
             }
         });

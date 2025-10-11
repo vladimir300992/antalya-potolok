@@ -1029,7 +1029,7 @@ img {
 .faq-answer.show {
   opacity: 1;
   padding: 24px;
-  max-height: var(--faq-answer-max-height, 400px);
+  max-height: var(--faq-answer-max-height, none);
   transform: translateY(0);
 }
 
