@@ -174,13 +174,20 @@ document.addEventListener('DOMContentLoaded', function() {
             button.setAttribute('aria-expanded', String(nextState));
             button.classList.toggle('active', nextState);
 
-            const currentHeight = answer.scrollHeight;
-            answer.style.setProperty('--faq-answer-max-height', `${currentHeight}px`);
-
             if (nextState) {
+                // Сбрасываем высоту перед показом, чтобы анимация запускалась корректно
+                answer.style.setProperty('--faq-answer-max-height', '0px');
                 answer.classList.add('show');
                 answer.setAttribute('aria-hidden', 'false');
+
+                requestAnimationFrame(() => {
+                    const expandedHeight = answer.scrollHeight;
+                    answer.style.setProperty('--faq-answer-max-height', `${expandedHeight}px`);
+                });
             } else {
+                const currentHeight = answer.scrollHeight;
+                answer.style.setProperty('--faq-answer-max-height', `${currentHeight}px`);
+
                 requestAnimationFrame(() => {
                     answer.classList.remove('show');
                     answer.setAttribute('aria-hidden', 'true');
