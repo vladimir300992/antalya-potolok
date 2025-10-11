@@ -146,6 +146,28 @@ document.addEventListener('DOMContentLoaded', function() {
         calculateBtn.addEventListener('click', calculatePrice);
     }
 
+    const faqButtons = document.querySelectorAll('.faq-question');
+    faqButtons.forEach(button => {
+        const answer = button.nextElementSibling;
+        button.addEventListener('click', () => {
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            const nextState = !isExpanded;
+
+            button.setAttribute('aria-expanded', String(nextState));
+            button.classList.toggle('active', nextState);
+
+            if (answer) {
+                if (nextState) {
+                    answer.classList.add('show');
+                    answer.removeAttribute('hidden');
+                } else {
+                    answer.classList.remove('show');
+                    answer.setAttribute('hidden', '');
+                }
+            }
+        });
+    });
+
     // Инициализация AOS
     if (typeof AOS !== 'undefined') {
         AOS.init({
