@@ -147,8 +147,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const faqButtons = document.querySelectorAll('.faq-question');
-    faqButtons.forEach(button => {
+    faqButtons.forEach((button, index) => {
         const answer = button.nextElementSibling;
+
+        if (!answer) {
+            return;
+        }
+
+        answer.removeAttribute('hidden');
+        answer.classList.remove('show');
+        answer.setAttribute('aria-hidden', 'true');
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-controls', `faq-answer-${index}`);
+        answer.id = `faq-answer-${index}`;
+
+        answer.addEventListener('transitionend', event => {
+            if (event.propertyName === 'max-height' && !answer.classList.contains('show')) {
+                answer.style.setProperty('--faq-answer-max-height', '0px');
+            }
+        });
+
         button.addEventListener('click', () => {
             const isExpanded = button.getAttribute('aria-expanded') === 'true';
             const nextState = !isExpanded;
@@ -156,14 +174,17 @@ document.addEventListener('DOMContentLoaded', function() {
             button.setAttribute('aria-expanded', String(nextState));
             button.classList.toggle('active', nextState);
 
-            if (answer) {
-                if (nextState) {
-                    answer.classList.add('show');
-                    answer.removeAttribute('hidden');
-                } else {
+            const currentHeight = answer.scrollHeight;
+            answer.style.setProperty('--faq-answer-max-height', `${currentHeight}px`);
+
+            if (nextState) {
+                answer.classList.add('show');
+                answer.setAttribute('aria-hidden', 'false');
+            } else {
+                requestAnimationFrame(() => {
                     answer.classList.remove('show');
-                    answer.setAttribute('hidden', '');
-                }
+                    answer.setAttribute('aria-hidden', 'true');
+                });
             }
         });
     });

@@ -978,7 +978,7 @@ img {
   padding: 18px 24px;
   font-size: 1.05rem;
   font-weight: 600;
-  color: var(--accent);
+  color: #ff8b44;
   text-align: left;
   cursor: pointer;
   position: relative;
@@ -991,33 +991,46 @@ img {
 
 .faq-question:hover,
 .faq-question:focus {
-  color: #c12e2e;
+  color: #ff6a00;
   outline: none;
 }
 
 .faq-question::after {
   content: "＋";
   font-size: 1.4rem;
-  color: var(--accent);
-  transition: transform 0.3s ease;
+  color: #ff8b44;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .faq-question.active::after {
   content: "－";
   transform: rotate(180deg);
+  color: #ff6a00;
 }
 
 .faq-answer {
-  display: none;
-  padding: 0 24px 24px;
+  max-height: 0;
+  padding: 0 24px;
   color: var(--text);
   line-height: 1.6;
   font-size: 1rem;
   background: rgba(255, 139, 68, 0.05);
+  opacity: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  transform: translateY(-8px);
+  transition: max-height 0.35s ease, opacity 0.35s ease, transform 0.35s ease,
+    padding 0.35s ease;
 }
 
 .faq-answer.show {
-  display: block;
+  opacity: 1;
+  padding: 24px;
+  max-height: var(--faq-answer-max-height, 400px);
+  transform: translateY(0);
 }
 
 .faq-answer p {
