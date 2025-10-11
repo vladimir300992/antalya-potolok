@@ -147,6 +147,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const faqButtons = document.querySelectorAll('.faq-question');
+    const canUseResizeObserver = typeof ResizeObserver !== 'undefined';
+    const answerObservers = canUseResizeObserver ? new WeakMap() : null;
+    const activeAnswers = new Set();
+
+    const recalcActiveAnswers = () => {
+        activeAnswers.forEach(activeAnswer => {
+            if (!activeAnswer.classList.contains('show')) {
+                return;
+            }
+
+            const updatedHeight = activeAnswer.scrollHeight;
+            activeAnswer.style.setProperty('--faq-answer-max-height', `${updatedHeight}px`);
+        });
+    };
+
+    if (!canUseResizeObserver) {
+        window.addEventListener('resize', recalcActiveAnswers);
+    }
+
     faqButtons.forEach((button, index) => {
         const answer = button.nextElementSibling;
 
@@ -157,21 +176,53 @@ document.addEventListener('DOMContentLoaded', function() {
         answer.removeAttribute('hidden');
         answer.classList.remove('show');
         answer.setAttribute('aria-hidden', 'true');
+        answer.style.setProperty('--faq-answer-max-height', '0px');
         button.setAttribute('aria-expanded', 'false');
         button.setAttribute('aria-controls', `faq-answer-${index}`);
         answer.id = `faq-answer-${index}`;
 
-        answer.addEventListener('transitionend', event => {
-            if (event.propertyName !== 'max-height') {
+        const getObserver = () => {
+            if (!canUseResizeObserver) {
+                return null;
+            }
+
+            let observer = answerObservers.get(answer);
+
+            if (!observer) {
+                observer = new ResizeObserver(() => {
+                    if (!answer.classList.contains('show')) {
+                        return;
+                    }
+
+                    const updatedHeight = answer.scrollHeight;
+                    answer.style.setProperty('--faq-answer-max-height', `${updatedHeight}px`);
+                });
+
+                answerObservers.set(answer, observer);
+            }
+
+            return observer;
+        };
+
+        const startObserving = () => {
+            const observer = getObserver();
+
+            if (observer) {
+                observer.observe(answer);
+            }
+        };
+
+        const stopObserving = () => {
+            if (!canUseResizeObserver) {
                 return;
             }
 
-            if (answer.classList.contains('show')) {
-                answer.style.setProperty('--faq-answer-max-height', 'none');
-            } else {
-                answer.style.setProperty('--faq-answer-max-height', '0px');
+            const observer = answerObservers.get(answer);
+
+            if (observer) {
+                observer.unobserve(answer);
             }
-        });
+        };
 
         button.addEventListener('click', () => {
             const isExpanded = button.getAttribute('aria-expanded') === 'true';
@@ -185,14 +236,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 answer.style.setProperty('--faq-answer-max-height', '0px');
                 answer.classList.add('show');
                 answer.setAttribute('aria-hidden', 'false');
+                activeAnswers.add(answer);
 
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
                         const expandedHeight = answer.scrollHeight;
                         answer.style.setProperty('--faq-answer-max-height', `${expandedHeight}px`);
+                        startObserving();
                     });
                 });
             } else {
+                activeAnswers.delete(answer);
+                stopObserving();
+
                 const currentHeight = answer.scrollHeight;
                 answer.style.setProperty('--faq-answer-max-height', `${currentHeight}px`);
 
