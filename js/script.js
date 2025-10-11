@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
-                        const expandedHeight = answer.scrollHeight+10;
+                        const expandedHeight = answer.scrollHeight;
                         answer.style.setProperty('--faq-answer-max-height', `${expandedHeight}px`);
                     });
                 });
