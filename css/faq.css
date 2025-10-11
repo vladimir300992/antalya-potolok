@@ -1,0 +1,13 @@
+.faq-answer {
+    transition: all 0.3s ease;
+}
+
+.faq-answer.open {
+    max-height: 500px; /* Adjust as needed */
+    margin-bottom: 20px;
+}
+
+.faq-answer.closed {
+    max-height: 0;
+    margin-bottom: 0;
+}
