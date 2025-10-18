@@ -376,8 +376,8 @@ img {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: calc(var(--container-width) + var(--container-horizontal-padding) * 2);
-  max-width: calc(var(--container-max-width) + var(--container-horizontal-padding) * 2);
+  width: var(--container-width);
+  max-width: var(--container-max-width);
   height: 100%;
   object-fit: cover;
   transform: translate(-50%, -50%);
@@ -886,8 +886,8 @@ img {
     }
 
     .main__background-video {
-      width: calc(var(--container-width) + var(--container-horizontal-padding) * 2);
-      max-width: calc(var(--container-max-width) + var(--container-horizontal-padding) * 2);
+      width: var(--container-width);
+      max-width: var(--container-max-width);
     }
 
     .calculator-actions {
