@@ -1835,7 +1835,7 @@ img {
   .navbar-fullwidth .container {
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   .mobile-menu-toggle {
@@ -1849,6 +1849,7 @@ img {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     margin-top: 0;
+    justify-content: center;
   }
 
   .navbar-menu li {
