@@ -1,5 +1,76 @@
 "use strict";
 // Progressive enhancement: project links, prices, reviews and FAQ work without JS.
+
+// Use one navigation model across the site: main sections open dedicated pages.
+const primaryNav = document.querySelector(".site-header nav");
+if (primaryNav) {
+  primaryNav.innerHTML = [
+    ["/potolki.html", "Решения"],
+    ["/rphotos.html", "Работы"],
+    ["/ceny.html", "Цены"],
+    ["/otzyvy.html", "Отзывы"],
+    ["/company.html", "О нас"],
+    ["/kontakty.html", "Контакты"],
+  ]
+    .map(([href, label]) => `<a href="${href}">${label}</a>`)
+    .join("");
+}
+
+// Preserve the visual line break while ensuring a literal word separator in rendered text.
+const heroTitle = document.querySelector(".hero h1");
+if (heroTitle) heroTitle.innerHTML = "Натяжные потолки <br />в Анталии";
+
+// Replace a decorative technology strip with concrete trust signals.
+const trustStrip = document.querySelector(".intro-strip .wrap");
+if (trustStrip) {
+  trustStrip.innerHTML = [
+    "Полотна BAUF",
+    "Гарантия 2 года",
+    "Прозрачная смета",
+    "Потолок + освещение",
+  ]
+    .map((item) => `<span>${item}</span>`)
+    .join("");
+}
+
+// Enrich existing LocalBusiness data with verified opening hours and price range.
+const businessSchema = document.querySelector('script[type="application/ld+json"]');
+if (businessSchema) {
+  try {
+    const data = JSON.parse(businessSchema.textContent);
+    if (data?.["@id"] === "https://antalya-potolok.com/#business") {
+      data.priceRange = "30-60+ USD/m²";
+      data.openingHoursSpecification = [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          opens: "09:00",
+          closes: "19:00",
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: "Saturday",
+          opens: "10:00",
+          closes: "16:00",
+        },
+      ];
+      businessSchema.textContent = JSON.stringify(data);
+    }
+  } catch (error) {
+    console.warn("Не удалось дополнить JSON-LD:", error);
+  }
+}
+
+// Softer measurement wording: the visit fee is fully credited toward the order.
+const terms = [...document.querySelectorAll(".terms p")];
+const measurementTerm = terms.find((item) =>
+  item.textContent.includes("Условия замера"),
+);
+if (measurementTerm) {
+  measurementTerm.innerHTML =
+    "<strong>Условия замера</strong><br />Выезд в Анталии — 1 000 TRY, полностью засчитываем в аванс по заказу. При внесении аванса на замере выезд бесплатный. За пределами города — дополнительно 1 000 TRY за каждые 50 км.";
+}
+
 const filters = document.querySelector(".filters");
 const projects = [...document.querySelectorAll("[data-room]")];
 if (filters && projects.length) {
