@@ -16,6 +16,18 @@ if (primaryNav) {
     .join("");
 }
 
+// Send high-intent solution clicks to dedicated commercial landing pages.
+const solutionLinkMap = {
+  "potolki.html#shadow-profile": "/tenevoj-potolok.html",
+  "potolki.html#floating": "/paryashchiy-potolok.html",
+  "potolki.html#light-lines": "/svetovye-linii.html",
+  "potolki.html#track": "/trekovoe-osveshchenie.html",
+};
+document.querySelectorAll(".solution-card").forEach((card) => {
+  const href = card.getAttribute("href");
+  if (solutionLinkMap[href]) card.setAttribute("href", solutionLinkMap[href]);
+});
+
 // Preserve the visual line break while ensuring a literal word separator in rendered text.
 const heroTitle = document.querySelector(".hero h1");
 if (heroTitle) heroTitle.innerHTML = "Натяжные потолки <br />в Анталии";
