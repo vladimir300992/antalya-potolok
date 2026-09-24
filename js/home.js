@@ -1,6 +1,33 @@
 "use strict";
 // Progressive enhancement: project links, prices, reviews and FAQ work without JS.
 
+// Use only the original logo image in the header and make it more prominent.
+function normalizeHeaderLogo() {
+  const brand = document.querySelector(".site-header .brand");
+  if (!brand) return;
+
+  brand.querySelector(":scope > span")?.remove();
+  brand.style.gap = "0";
+
+  const logo = brand.querySelector("img");
+  if (!logo) return;
+
+  logo.alt = "Antalya Stretch Ceiling";
+
+  const applyLogoSize = () => {
+    const mobile = window.matchMedia("(max-width: 700px)").matches;
+    logo.style.width = "auto";
+    logo.style.height = mobile ? "58px" : "84px";
+    logo.style.maxWidth = mobile ? "160px" : "220px";
+    logo.style.objectFit = "contain";
+  };
+
+  applyLogoSize();
+  window.addEventListener("resize", applyLogoSize, { passive: true });
+}
+
+normalizeHeaderLogo();
+
 // Use one navigation model across the site: main sections open dedicated pages.
 const primaryNav = document.querySelector(".site-header nav");
 if (primaryNav) {
