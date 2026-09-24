@@ -1,7 +1,4 @@
-const TELEGRAM_CONFIG = window.TELEGRAM_CONFIG || {
-    token: '1403690168:AAHqRNU27X5THfsdASyZHMHdWwHX9d5SZcs',
-    chatId: '335094318'
-};
+const TELEGRAM_CONFIG = window.TELEGRAM_CONFIG || {};
 
 window.TELEGRAM_CONFIG = TELEGRAM_CONFIG;
 
@@ -228,7 +225,7 @@ async function sendTelegramLead(form) {
     const { token, chatId } = window.TELEGRAM_CONFIG || {};
 
     if (!token || !chatId) {
-        throw new Error('Не настроены параметры Telegram.');
+        throw new Error('Telegram-отправка не настроена.');
     }
 
     const formData = new FormData(form);
@@ -307,7 +304,7 @@ function initTelegramForms() {
                 alert('Спасибо! Мы скоро с вами свяжемся.');
             } catch (error) {
                 console.error('Ошибка отправки формы:', error);
-                alert('Произошла ошибка. Пожалуйста, позвоните нам напрямую.');
+                alert('Форма временно недоступна. Напишите нам в WhatsApp или позвоните.');
             } finally {
                 if (submitButton) {
                     submitButton.disabled = false;
