@@ -20,6 +20,24 @@ if (primaryNav) {
     .join("");
 }
 
+// Give the long catalogue clear internal links to dedicated commercial pages.
+const solutionPages = {
+  "shadow-profile": ["/tenevoj-potolok.html", "Подробнее о теневом потолке ↗"],
+  floating: ["/paryashchiy-potolok.html", "Подробнее о парящем потолке ↗"],
+  "light-lines": ["/svetovye-linii.html", "Подробнее о световых линиях ↗"],
+  track: ["/trekovoe-osveshchenie.html", "Подробнее о трековом освещении ↗"],
+};
+Object.entries(solutionPages).forEach(([id, [href, label]]) => {
+  const card = document.getElementById(id);
+  const content = card?.querySelector(".catalog-content");
+  if (!content || content.querySelector(`[href="${href}"]`)) return;
+  const link = document.createElement("a");
+  link.className = "text-link";
+  link.href = href;
+  link.textContent = label;
+  content.append(link);
+});
+
 // Native horizontal scrolling remains available without JavaScript.
 document.querySelectorAll(".work-section").forEach((section) => {
   const track = section.querySelector(".carousel-track");
