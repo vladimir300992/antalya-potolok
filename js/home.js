@@ -12,7 +12,7 @@ function normalizeHeaderLogo() {
   const logo = brand.querySelector("img");
   if (!logo) return;
 
-  logo.alt = "Antalya Stretch Ceiling";
+  logo.alt = "Antalya Stretch Ceiling — натяжные потолки в Анталии";
 
   const applyLogoSize = () => {
     const mobile = window.matchMedia("(max-width: 700px)").matches;
@@ -27,6 +27,11 @@ function normalizeHeaderLogo() {
 }
 
 normalizeHeaderLogo();
+
+document.title = document.title.replaceAll("Antalya Potolok", "Antalya Stretch Ceiling");
+document.querySelectorAll('meta[content*="Antalya Potolok"]').forEach((meta) => {
+  meta.content = meta.content.replaceAll("Antalya Potolok", "Antalya Stretch Ceiling");
+});
 
 // Use one navigation model across the site: main sections open dedicated pages.
 const primaryNav = document.querySelector(".site-header nav");
@@ -203,14 +208,12 @@ if (form) {
     if (!estimate) {
       estimateResult.hidden = false;
       estimateResult.textContent =
-        "Укажите общую площадь в м² (например, 35 м²), чтобы увидеть стартовый ориентир.";
+        "Укажите общую площадь в м² (например, 35 м²), чтобы увидеть минимальный базовый ориентир.";
       return;
     }
 
     estimateResult.hidden = false;
-    estimateResult.innerHTML = estimate.isBase
-      ? `<strong>Стартовый ориентир: от ${estimate.total.toLocaleString("ru-RU")} $</strong> для базовой комплектации (${estimate.area.toLocaleString("ru-RU")} м² × ${estimate.rate} $/м²). Тип потолка, периметр, ниши и освещение уточняются отдельно.`
-      : `<strong>Стартовый ориентир: от ${estimate.total.toLocaleString("ru-RU")} $</strong> (${estimate.area.toLocaleString("ru-RU")} м² × ${estimate.rate} $/м²). Это не итоговая смета: периметр, ниши, освещение и сложные узлы считаются отдельно.`;
+    estimateResult.innerHTML = `<strong>Минимальный базовый ориентир: от ${estimate.total.toLocaleString("ru-RU")} $</strong> (${estimate.area.toLocaleString("ru-RU")} м² × ${estimate.rate} $/м²). Это нижняя граница по площади и выбранному типу потолка. Периметр, углы, ниши, споты, люстры, треки, световые линии и сложные узлы в этот ориентир не входят и считаются после уточнения.`;
   };
 
   dimensionsInput?.addEventListener("input", renderEstimate);
@@ -236,7 +239,7 @@ if (form) {
       ),
       ...(estimate
         ? [
-            `Стартовый ориентир на сайте: от ${estimate.total} $ (${estimate.area} м² × ${estimate.rate} $/м²), не итоговая смета.`,
+            `Минимальный базовый ориентир на сайте: от ${estimate.total} $ (${estimate.area} м² × ${estimate.rate} $/м²). Периметр, ниши и освещение в эту сумму не включены.`,
           ]
         : []),
     ].join("\n");

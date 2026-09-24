@@ -14,7 +14,9 @@ function normalizeHeaderLogo() {
   const logo = brand.querySelector("img");
   if (!logo) return;
 
-  logo.alt = "Antalya Stretch Ceiling";
+  logo.alt = isTurkish
+    ? "Antalya Stretch Ceiling — Antalya gergi tavan"
+    : "Antalya Stretch Ceiling — натяжные потолки в Анталии";
 
   const applyLogoSize = () => {
     const mobile = window.matchMedia("(max-width: 700px)").matches;
@@ -29,6 +31,12 @@ function normalizeHeaderLogo() {
 }
 
 normalizeHeaderLogo();
+
+// Keep the public brand name consistent in rendered metadata.
+document.title = document.title.replaceAll("Antalya Potolok", "Antalya Stretch Ceiling");
+document.querySelectorAll('meta[content*="Antalya Potolok"]').forEach((meta) => {
+  meta.content = meta.content.replaceAll("Antalya Potolok", "Antalya Stretch Ceiling");
+});
 
 // Keep one navigation model inside each language version.
 const primaryNav = document.querySelector(".site-header nav");

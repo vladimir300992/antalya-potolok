@@ -11,7 +11,7 @@ function normalizeHeaderLogo() {
   const logo = brand.querySelector("img");
   if (!logo) return;
 
-  logo.alt = "Antalya Stretch Ceiling";
+  logo.alt = "Antalya Stretch Ceiling — Antalya gergi tavan";
 
   const applyLogoSize = () => {
     const mobile = window.matchMedia("(max-width: 700px)").matches;
@@ -26,6 +26,11 @@ function normalizeHeaderLogo() {
 }
 
 normalizeHeaderLogo();
+
+document.title = document.title.replaceAll("Antalya Potolok", "Antalya Stretch Ceiling");
+document.querySelectorAll('meta[content*="Antalya Potolok"]').forEach((meta) => {
+  meta.content = meta.content.replaceAll("Antalya Potolok", "Antalya Stretch Ceiling");
+});
 
 const filters = document.querySelector(".filters");
 const projects = [...document.querySelectorAll("[data-room]")];
@@ -105,12 +110,10 @@ if (form) {
     estimateResult.hidden = false;
     if (!estimate) {
       estimateResult.textContent =
-        "Başlangıç fiyatını görmek için toplam alanı m² olarak yazın. Örnek: 35 m².";
+        "Minimum başlangıç tutarını görmek için toplam alanı m² olarak yazın. Örnek: 35 m².";
       return;
     }
-    estimateResult.innerHTML = estimate.isBase
-      ? `<strong>Başlangıç tahmini: ${estimate.total.toLocaleString("tr-TR")} $'dan</strong> (${estimate.area.toLocaleString("tr-TR")} m² × ${estimate.rate} $/m²). Tavan tipi, çevre uzunluğu, perde nişi ve aydınlatma ayrıca hesaplanır.`
-      : `<strong>Başlangıç tahmini: ${estimate.total.toLocaleString("tr-TR")} $'dan</strong> (${estimate.area.toLocaleString("tr-TR")} m² × ${estimate.rate} $/m²). Bu nihai teklif değildir. Çevre, nişler, aydınlatma ve özel detaylar ayrıca hesaplanır.`;
+    estimateResult.innerHTML = `<strong>Minimum başlangıç tutarı: ${estimate.total.toLocaleString("tr-TR")} $ seviyesinden</strong> (${estimate.area.toLocaleString("tr-TR")} m² × ${estimate.rate} $/m²). Bu yalnızca alan ve seçilen tavan tipine göre alt sınırdır. Çevre, köşeler, perde nişi, spot, avize, ray, ışık çizgileri ve özel detaylar ayrıca hesaplanır.`;
   };
 
   dimensionsInput?.addEventListener("input", renderEstimate);
@@ -136,7 +139,7 @@ if (form) {
       ),
       ...(estimate
         ? [
-            `Sitedeki başlangıç tahmini: ${estimate.total} $'dan (${estimate.area} m² × ${estimate.rate} $/m²). Nihai teklif değildir.`,
+            `Sitedeki minimum başlangıç tutarı: ${estimate.total} $ seviyesinden (${estimate.area} m² × ${estimate.rate} $/m²). Çevre, nişler ve aydınlatma bu tutara dahil değildir.`,
           ]
         : []),
     ].join("\n");
