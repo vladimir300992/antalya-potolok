@@ -1,17 +1,28 @@
 "use strict";
 
-// Keep the same primary navigation on all inner pages without duplicating markup changes.
+const currentPath = window.location.pathname;
+const isTurkish = currentPath.startsWith("/tr/");
+
+// Keep one navigation model inside each language version.
 const primaryNav = document.querySelector(".site-header nav");
 if (primaryNav) {
-  const currentPath = window.location.pathname;
-  const items = [
-    ["/potolki.html", "Решения"],
-    ["/rphotos.html", "Работы"],
-    ["/ceny.html", "Цены"],
-    ["/otzyvy.html", "Отзывы"],
-    ["/company.html", "О нас"],
-    ["/kontakty.html", "Контакты"],
-  ];
+  const items = isTurkish
+    ? [
+        ["/tr/gergi-tavan.html", "Çözümler"],
+        ["/tr/projeler.html", "Projeler"],
+        ["/tr/fiyatlar.html", "Fiyatlar"],
+        ["/tr/yorumlar.html", "Yorumlar"],
+        ["/tr/hakkimizda.html", "Hakkımızda"],
+        ["/tr/iletisim.html", "İletişim"],
+      ]
+    : [
+        ["/potolki.html", "Решения"],
+        ["/rphotos.html", "Работы"],
+        ["/ceny.html", "Цены"],
+        ["/otzyvy.html", "Отзывы"],
+        ["/company.html", "О нас"],
+        ["/kontakty.html", "Контакты"],
+      ];
   primaryNav.innerHTML = items
     .map(([href, label]) => {
       const current = currentPath === href ? ' aria-current="page"' : "";
@@ -20,23 +31,58 @@ if (primaryNav) {
     .join("");
 }
 
-// Give the long catalogue clear internal links to dedicated commercial pages.
-const solutionPages = {
-  "shadow-profile": ["/tenevoj-potolok.html", "Подробнее о теневом потолке ↗"],
-  floating: ["/paryashchiy-potolok.html", "Подробнее о парящем потолке ↗"],
-  "light-lines": ["/svetovye-linii.html", "Подробнее о световых линиях ↗"],
-  track: ["/trekovoe-osveshchenie.html", "Подробнее о трековом освещении ↗"],
+// Add the matching language version when the page does not already contain a switch.
+const languagePairs = {
+  "/potolki.html": "/tr/gergi-tavan.html",
+  "/rphotos.html": "/tr/projeler.html",
+  "/ceny.html": "/tr/fiyatlar.html",
+  "/otzyvy.html": "/tr/yorumlar.html",
+  "/company.html": "/tr/hakkimizda.html",
+  "/kontakty.html": "/tr/iletisim.html",
+  "/tenevoj-potolok.html": "/tr/golge-profil-gergi-tavan.html",
+  "/paryashchiy-potolok.html": "/tr/ledli-gergi-tavan.html",
+  "/svetovye-linii.html": "/tr/isik-cizgileri.html",
+  "/trekovoe-osveshchenie.html": "/tr/ray-aydinlatma.html",
+  "/tr/gergi-tavan.html": "/potolki.html",
+  "/tr/projeler.html": "/rphotos.html",
+  "/tr/fiyatlar.html": "/ceny.html",
+  "/tr/yorumlar.html": "/otzyvy.html",
+  "/tr/hakkimizda.html": "/company.html",
+  "/tr/iletisim.html": "/kontakty.html",
+  "/tr/golge-profil-gergi-tavan.html": "/tenevoj-potolok.html",
+  "/tr/ledli-gergi-tavan.html": "/paryashchiy-potolok.html",
+  "/tr/isik-cizgileri.html": "/svetovye-linii.html",
+  "/tr/ray-aydinlatma.html": "/trekovoe-osveshchenie.html",
 };
-Object.entries(solutionPages).forEach(([id, [href, label]]) => {
-  const card = document.getElementById(id);
-  const content = card?.querySelector(".catalog-content");
-  if (!content || content.querySelector(`[href="${href}"]`)) return;
-  const link = document.createElement("a");
-  link.className = "text-link";
-  link.href = href;
-  link.textContent = label;
-  content.append(link);
-});
+const headerRow = document.querySelector(".site-header .header-row");
+if (headerRow && !headerRow.querySelector(":scope > a.text-link")) {
+  const switchLink = document.createElement("a");
+  switchLink.className = "text-link";
+  switchLink.href = languagePairs[currentPath] || (isTurkish ? "/" : "/tr/");
+  switchLink.hreflang = isTurkish ? "ru" : "tr";
+  switchLink.textContent = isTurkish ? "RU" : "TR";
+  headerRow.append(switchLink);
+}
+
+// Give the Russian catalogue clear internal links to dedicated commercial pages.
+if (!isTurkish) {
+  const solutionPages = {
+    "shadow-profile": ["/tenevoj-potolok.html", "Подробнее о теневом потолке ↗"],
+    floating: ["/paryashchiy-potolok.html", "Подробнее о парящем потолке ↗"],
+    "light-lines": ["/svetovye-linii.html", "Подробнее о световых линиях ↗"],
+    track: ["/trekovoe-osveshchenie.html", "Подробнее о трековом освещении ↗"],
+  };
+  Object.entries(solutionPages).forEach(([id, [href, label]]) => {
+    const card = document.getElementById(id);
+    const content = card?.querySelector(".catalog-content");
+    if (!content || content.querySelector(`[href="${href}"]`)) return;
+    const link = document.createElement("a");
+    link.className = "text-link";
+    link.href = href;
+    link.textContent = label;
+    content.append(link);
+  });
+}
 
 // Native horizontal scrolling remains available without JavaScript.
 document.querySelectorAll(".work-section").forEach((section) => {
