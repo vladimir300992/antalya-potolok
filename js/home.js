@@ -16,6 +16,17 @@ if (primaryNav) {
     .join("");
 }
 
+// Language switch for the Turkish version.
+const headerRow = document.querySelector(".site-header .header-row");
+if (headerRow && !headerRow.querySelector(":scope > a.text-link")) {
+  const languageLink = document.createElement("a");
+  languageLink.className = "text-link";
+  languageLink.href = "/tr/";
+  languageLink.hreflang = "tr";
+  languageLink.textContent = "TR";
+  headerRow.append(languageLink);
+}
+
 // Send high-intent solution clicks to dedicated commercial landing pages.
 const solutionLinkMap = {
   "potolki.html#shadow-profile": "/tenevoj-potolok.html",
