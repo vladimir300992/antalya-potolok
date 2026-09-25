@@ -26,7 +26,7 @@
     const area = parseArea(field("dimensions").value);
     const rates = { standard: 30, shadow: 45, floating: 60 };
     let rate = rates[field("ceiling").value];
-    if (!rate || !Number.isFinite(area) || area <= 0 || area > 10000) return null;
+    if (!field("spaceType").value || !rate || !Number.isFinite(area) || area <= 0 || area > 10000) return null;
     if (field("spaceType").value === "mixed") return null;
     if (field("spaceType").value === "bathroom") rate = Math.max(rate, 50);
     return { area, rate, total: Math.ceil(area * rate) };
@@ -45,7 +45,7 @@
       if (lang === "tr")
         return "Tavan tipini seçin ve tek bir toplam alan (35 m²) veya bir odanın ölçüsünü (5×6 m) yazın. Birden fazla oda varsa alanları toplayın veya açıklamaya ayrı ayrı yazın.";
       if (lang === "en")
-        return "Select a ceiling type and enter one total area (35 m²) or one room size (5×6 m). For several rooms, enter the total area or list each room size in the comments.";
+        return "Select a room category and ceiling type, then enter one total area (35 m²) or the dimensions of one room (5×6 m). For several rooms, enter the total area or list each room's dimensions in the comments.";
       return "Выберите тип потолка и укажите одну общую площадь (35 м²) или размеры одной комнаты (5×6 м). Для нескольких комнат укажите сумму площадей либо перечислите размеры в комментарии.";
     }
 
@@ -54,7 +54,7 @@
     if (lang === "tr")
       return `Başlangıç fiyatına göre: ${amount} $ seviyesinden (${area} m² × ${estimate.rate} $/m²). Bu, nihai teklif veya bütçe aralığı değildir. Çevre, köşeler, nişler ve aydınlatma bu hesapta ayrıca fiyatlandırılmadı; toplamı artırabilir. Ayrıntılar ve keşif sonrası yazılı teklif hazırlanır.`;
     if (lang === "en")
-      return `Starting rate: from ${amount} $ (${area} m² × ${estimate.rate} $/m²). This is not a final quote or budget range. Perimeter, corners, niches and lighting are not priced separately here and can increase the total. The full scope and price are fixed in the written estimate after details and measurement are confirmed.`;
+      return `At the starting rate: from $${amount} (${area} m² × $${estimate.rate}/m²). All dollar prices are in USD. This is not a final quote or budget range. Perimeter, corners, curtain recesses and lighting have not been priced separately here and may increase the total. We confirm the full scope and price in a written quote after discussing the details and measuring the space.`;
     return `По стартовой ставке: от ${amount} $ (${area} м² × ${estimate.rate} $/м²). Это не смета и не диапазон бюджета. Периметр, углы, ниши и освещение здесь отдельно не рассчитываются и могут увеличить итог. Состав и полную стоимость фиксируем в смете после уточнения деталей и замера.`;
   }
 
