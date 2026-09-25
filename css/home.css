@@ -1095,3 +1095,79 @@ body {
     font-size: 14px;
   }
 }
+
+/* Compact packages remain usable as native disclosures without JavaScript. */
+.price-grid { align-items: start; }
+.price-card.package-card {
+  display: block;
+  padding: 0;
+  background: #f2f3ef;
+  border-color: #cbd2cc;
+  transition: background-color .3s, color .3s, border-color .3s;
+  min-width: 0;
+}
+.package-card > summary {
+  padding: 28px;
+  cursor: pointer;
+  list-style: none;
+  border-radius: 6px;
+}
+.package-card > summary::-webkit-details-marker { display: none; }
+.package-card .tag { display: block; margin-bottom: 20px; font-size: 14px; }
+.package-card .price { font-size: clamp(32px, 3vw, 42px); white-space: normal; }
+.package-toggle { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 16px; margin-top: 20px; }
+.package-icon { font-size: 28px; line-height: 1; transition: transform .3s; }
+.package-less { display: none; }
+.package-card[open] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.package-card[open] .tag { color: #ffac77; }
+.package-card[open] .package-more { display: none; }
+.package-card[open] .package-less { display: inline; }
+.package-card[open] .package-icon { transform: rotate(45deg); }
+.package-content { overflow: hidden; }
+.package-body { padding: 0 28px 28px; }
+.package-body > p { border-top: 1px solid #ffffff38; padding-top: 22px; font-size: 17px; }
+.package-body ul { font-size: 16px; line-height: 1.65; margin: 20px 0 26px; }
+.package-body li + li { margin-top: 12px; }
+.package-body .button { width: 100%; text-align: center; padding: 14px 16px; }
+.bathroom-offer { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 32px; padding: 30px; border: 1px solid #cbd2cc; border-left: 4px solid var(--orange); border-radius: 6px; margin-top: 26px; background: #f2f3ef; }
+.bathroom-offer .eyebrow { margin-bottom: 10px; font-size: 14px; }
+.bathroom-offer h3 { font-size: 27px; font-weight: 500; }
+.bathroom-offer h3 + p { color: var(--muted); max-width: 620px; margin-top: 14px; font-size: 17px; }
+.bathroom-price > p { font-size: 34px; white-space: nowrap; margin-bottom: 10px; }
+.bathroom-price small { font-size: 18px; margin-left: 6px; }
+#prices .price-note { font-size: 16px; }
+.quality-section { background: #e9ece7; }
+.quality-grid { display: grid; grid-template-columns: 1.2fr 1fr .9fr; gap: 38px; margin-top: 38px; align-items: center; }
+.quality-grid h3 { font-size: 23px; font-weight: 500; }
+.quality-grid p { margin-top: 12px; font-size: 17px; }
+.material-brand img { width: 196px; height: auto; object-fit: contain; margin-bottom: 24px; }
+.material-brand > p { font-size: 21px; }
+.material-brand .text-link { display: inline-block; margin-top: 22px; }
+.material-benefits > div + div { margin-top: 30px; }
+.material-benefits p { color: var(--muted); }
+.warranty-card { background: var(--ink); color: white; padding: 30px; border-radius: 6px; }
+.warranty-card > span { display: block; font-size: 72px; line-height: 1; color: var(--orange); margin-bottom: 18px; }
+.project-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 26px 0 30px; border-top: 1px solid #cbd2cc; margin-bottom: 26px; }
+.project-metrics p { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.project-metrics strong { font-size: clamp(48px, 6vw, 72px); font-weight: 500; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.project-metrics span { font-size: 18px; max-width: 340px; }
+.footer-brand { display: inline-block; }
+.footer-brand img { width: 240px; height: auto; max-width: 100%; object-fit: contain; }
+.faq-list summary { font-size: 18px; }
+.faq-list details p { font-size: 17px; }
+@media (max-width: 900px) {
+  .quality-grid { grid-template-columns: 1fr 1fr; }
+  .warranty-card { grid-column: 1 / -1; }
+}
+@media (max-width: 700px) {
+  .package-card > summary { padding: 24px; }
+  .package-body { padding: 0 24px 24px; }
+  .bathroom-offer, .quality-grid { grid-template-columns: 1fr; gap: 26px; }
+  .bathroom-offer { padding: 24px; }
+  .project-metrics { gap: 20px; }
+  .project-metrics span { font-size: 16px; }
+  .quality-grid h3 { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .package-card, .package-icon { transition: none; }
+}
