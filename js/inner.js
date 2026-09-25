@@ -93,6 +93,49 @@ function enhanceHeader() {
   });
 }
 
+function addPortfolioPhoto(sectionId, src, alt, width, height) {
+  const track = document.querySelector(`#${sectionId} .carousel-track`);
+  if (!track || track.querySelector(`img[src="${src}"]`)) return;
+  const image = document.createElement("img");
+  image.src = src;
+  image.alt = alt;
+  image.loading = "lazy";
+  image.decoding = "async";
+  image.width = width;
+  image.height = height;
+  track.append(image);
+}
+
+function addSuppliedPortfolioPhotos() {
+  const projectPages = ["/rphotos.html", "/tr/projeler.html", "/en/projects.html"];
+  if (!projectPages.includes(currentPath)) return;
+
+  const livingId = pageLanguage === "tr" ? "salon" : "living";
+  const bedroomId = pageLanguage === "tr" ? "yatak-odasi" : "bedroom";
+  const alt = {
+    ru: {
+      lines: "Световая линия и трековое освещение на натяжном потолке",
+      track: "Трековое освещение в интерьере с натяжным потолком",
+      shadow: "Теневой натяжной потолок с подвесным светильником",
+    },
+    tr: {
+      lines: "Gergi tavanda ışık çizgisi ve ray aydınlatma",
+      track: "Gergi tavanlı iç mekanda ray aydınlatma",
+      shadow: "Sarkıt aydınlatmalı gölge profilli gergi tavan",
+    },
+    en: {
+      lines: "Linear light and track lighting integrated into a stretch ceiling",
+      track: "Track lighting in an interior with a stretch ceiling",
+      shadow: "Shadow-gap stretch ceiling with pendant light",
+    },
+  }[pageLanguage] || null;
+  if (!alt) return;
+
+  addPortfolioPhoto(livingId, "/img/projects/light-lines-track.webp", alt.lines, 653, 720);
+  addPortfolioPhoto(livingId, "/img/projects/track-lighting-kitchen.webp", alt.track, 600, 400);
+  addPortfolioPhoto(bedroomId, "/img/projects/shadow-ceiling-chandelier.webp", alt.shadow, 720, 540);
+}
+
 loadVisualFixes();
 
 // Add English as the third visible language on existing RU/TR pages.
@@ -135,6 +178,7 @@ if (pageLanguage !== "en") {
 
 enhanceHeader();
 ensureMobileCta();
+addSuppliedPortfolioPhotos();
 
 // Native horizontal scrolling remains available without JavaScript.
 document.querySelectorAll(".work-section").forEach((section) => {
