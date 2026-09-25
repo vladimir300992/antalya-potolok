@@ -143,3 +143,65 @@ if (pageLanguage !== "en") {
 
 enhanceHeader();
 ensureMobileCta();
+
+// Animate native details; keyboard activation and no-JS fallback stay native.
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+document.querySelectorAll('.package-card').forEach((card) => {
+  const summary = card.querySelector('summary');
+  const panel = card.querySelector('.package-content');
+  let animation;
+  let expanded = card.open;
+  summary.addEventListener('click', (event) => {
+    event.preventDefault();
+    const height = card.open ? panel.getBoundingClientRect().height : 0;
+    animation?.cancel();
+    expanded = !expanded;
+    if (reducedMotion.matches || !panel.animate) {
+      card.open = expanded;
+      return;
+    }
+    card.open = true;
+    animation = panel.animate(
+      [{ height: `${height}px`, opacity: height ? 1 : 0 },
+       { height: expanded ? `${panel.scrollHeight}px` : '0px', opacity: expanded ? 1 : 0 }],
+      { duration: 320, easing: 'cubic-bezier(.22,1,.36,1)' },
+    );
+    animation.onfinish = () => { card.open = expanded; animation = null; };
+  });
+});
+
+// The selected package carries through to the existing estimate form.
+document.querySelectorAll('[data-package], [data-room-estimate]').forEach((link) => {
+  link.addEventListener('click', () => {
+    const form = document.getElementById('estimate-form');
+    if (!form) return;
+    const ceiling = form.elements.namedItem('ceiling');
+    const room = form.elements.namedItem('spaceType');
+    if (link.dataset.package) ceiling.value = link.dataset.package;
+    if (link.dataset.roomEstimate) {
+      room.value = link.dataset.roomEstimate;
+      if (!ceiling.value) ceiling.value = 'standard';
+    }
+    form.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+});
+
+// Owner-supplied total, rendered in HTML as well as in the animation.
+const projectCounter = document.querySelector('[data-count]');
+if (projectCounter && !reducedMotion.matches && 'IntersectionObserver' in window) {
+  const observer = new IntersectionObserver((entries) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    observer.disconnect();
+    const total = Number(projectCounter.dataset.count);
+    projectCounter.setAttribute('aria-label', String(total));
+    const start = performance.now();
+    const frame = (now) => {
+      const progress = Math.min((now - start) / 1000, 1);
+      projectCounter.textContent = String(Math.round(total * (1 - (1 - progress) ** 3)));
+      if (progress < 1 && !reducedMotion.matches) requestAnimationFrame(frame);
+      else projectCounter.textContent = String(total);
+    };
+    requestAnimationFrame(frame);
+  }, { threshold: .5 });
+  observer.observe(projectCounter);
+}
