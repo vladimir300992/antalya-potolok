@@ -10,6 +10,20 @@ function loadVisualFixes() {
   document.head.append(link);
 }
 
+function ensureMobileCta() {
+  if (document.querySelector(".mobile-cta")) return;
+  const labels = {
+    ru: { call: "Позвонить", estimate: "Рассчитать потолок ↗" },
+    tr: { call: "Ara", estimate: "Ön fiyat ↗" },
+    en: { call: "Call", estimate: "Get estimate ↗" },
+  };
+  const copy = labels[pageLanguage] || labels.ru;
+  const cta = document.createElement("div");
+  cta.className = "mobile-cta";
+  cta.innerHTML = `<a href="tel:+905348287110">${copy.call}</a><a href="#calculatorSection">${copy.estimate}</a>`;
+  document.body.append(cta);
+}
+
 function enhanceHeader() {
   const header = document.querySelector(".site-header");
   const headerRow = header?.querySelector(".header-row");
@@ -128,3 +142,4 @@ if (pageLanguage !== "en") {
 }
 
 enhanceHeader();
+ensureMobileCta();
