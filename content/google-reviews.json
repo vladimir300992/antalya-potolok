@@ -2,31 +2,25 @@
   "source": "https://maps.app.goo.gl/N2Wis622aMoHfF5F8",
   "business": "Flex Tavan Натяжные потолки Анталия",
   "checkedOn": "2026-09-25",
-  "editorialNote": "Short editorial summaries, not verbatim quotations. Authors and review contents were read in the public Google Maps review tab. Publication dates are omitted because Google showed relative dates only.",
+  "editorialNote": "Verbatim Russian review text as observed in the Google Maps review tab on 2026-09-25. Long reviews use explicitly labelled excerpts; the short tatiana ozolina review is complete. Original-language text is preserved on all language versions.",
   "reviews": [
     {
       "author": "Ekaterina Ucar",
-      "summary": {
-        "ru": "Екатерина отметила регулярные отчёты, согласование доплат и взаимодействие с другими мастерами во время её отсутствия.",
-        "tr": "Ekaterina, evde olmadığı süreçte düzenli bilgilendirmeyi, ek ücretlerin önceden onaylanmasını ve ustalar arasındaki koordinasyonu beğendi.",
-        "en": "Ekaterina valued progress updates, agreed extras and coordination with other trades while she was away."
-      }
+      "text": "Все дополнительные работы и их стоимость обговаривались заранее. Выполненной работой и процессом коммуникации довольна на все 100%, рекомендую с чистой совестью.",
+      "language": "ru",
+      "excerpt": true
     },
     {
       "author": "Marina Tekhova",
-      "summary": {
-        "ru": "Марина выделила понятную смету, выполнение в срок и чистоту при установке потолка и света.",
-        "tr": "Marina, anlaşılır fiyat teklifini, zamanında teslimi ve tavan ile aydınlatma montajındaki temizliği öne çıkardı.",
-        "en": "Marina highlighted clear pricing, timely completion and tidy ceiling and lighting installation."
-      }
+      "text": "Монтаж потолка и освещения — быстро, аккуратно и чисто. Видно серьёзное отношение к качеству и клиенту.",
+      "language": "ru",
+      "excerpt": true
     },
     {
       "author": "tatiana ozolina",
-      "summary": {
-        "ru": "Татьяна довольна качеством установки; особенно ей понравились световые потолки.",
-        "tr": "Tatiana montaj kalitesinden memnun kaldı; özellikle ışıklı tavanları beğendi.",
-        "en": "Tatiana was pleased with the installation, particularly the luminous ceilings."
-      }
+      "text": "Хочу поблагодарить ребят за работу. Делали у меня потолки, очень аккуратно и профессионально сделали.Молодцы Особо понравились световые потолки.",
+      "language": "ru",
+      "excerpt": false
     }
   ]
 }
