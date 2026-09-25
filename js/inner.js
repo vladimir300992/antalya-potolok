@@ -136,9 +136,67 @@ function addSuppliedPortfolioPhotos() {
   addPortfolioPhoto(bedroomId, "/img/projects/shadow-ceiling-chandelier.webp", alt.shadow, 720, 540);
 }
 
+function replaceServicePhoto() {
+  const groups = {
+    shadow: [
+      "/tenevoj-potolok.html",
+      "/tr/golge-profil-gergi-tavan.html",
+      "/en/shadow-gap-ceiling.html",
+    ],
+    lines: [
+      "/svetovye-linii.html",
+      "/tr/isik-cizgileri.html",
+      "/en/linear-lighting.html",
+    ],
+    track: [
+      "/trekovoe-osveshchenie.html",
+      "/tr/ray-aydinlatma.html",
+      "/en/track-lighting.html",
+    ],
+  };
+  const type = Object.keys(groups).find((key) => groups[key].includes(currentPath));
+  if (!type) return;
+  const image = document.querySelector(".service-photo img");
+  if (!image) return;
+
+  const copy = {
+    ru: {
+      shadow: ["/img/projects/shadow-gap-detail.webp", "Реальный теневой зазор натяжного потолка у стены"],
+      lines: ["/img/projects/linear-light-shadow.webp", "Реальная световая линия в натяжном потолке с теневым примыканием"],
+      track: ["/img/projects/track-lighting-kitchen.webp", "Реальное трековое освещение с натяжным потолком в интерьере"],
+    },
+    tr: {
+      shadow: ["/img/projects/shadow-gap-detail.webp", "Duvar kenarında gerçek gölge profilli gergi tavan detayı"],
+      lines: ["/img/projects/linear-light-shadow.webp", "Gölge profilli gergi tavanda gerçek ışık çizgisi uygulaması"],
+      track: ["/img/projects/track-lighting-kitchen.webp", "İç mekanda gerçek gergi tavan ve ray aydınlatma uygulaması"],
+    },
+    en: {
+      shadow: ["/img/projects/shadow-gap-detail.webp", "Real shadow-gap stretch ceiling detail at the wall"],
+      lines: ["/img/projects/linear-light-shadow.webp", "Real linear light installation in a shadow-gap stretch ceiling"],
+      track: ["/img/projects/track-lighting-kitchen.webp", "Real track lighting installation with a stretch ceiling"],
+    },
+  }[pageLanguage] || null;
+  if (!copy) return;
+  const [src, alt] = copy[type];
+  image.src = src;
+  image.alt = alt;
+  image.removeAttribute("srcset");
+  image.decoding = "async";
+
+  if (type === "shadow") {
+    image.width = 900;
+    image.height = 1200;
+  } else if (type === "lines") {
+    image.width = 768;
+    image.height = 960;
+  } else {
+    image.width = 600;
+    image.height = 400;
+  }
+}
+
 loadVisualFixes();
 
-// Add English as the third visible language on existing RU/TR pages.
 const englishPairs = {
   "/potolki.html": "/en/stretch-ceilings.html",
   "/tr/gergi-tavan.html": "/en/stretch-ceilings.html",
@@ -179,8 +237,8 @@ if (pageLanguage !== "en") {
 enhanceHeader();
 ensureMobileCta();
 addSuppliedPortfolioPhotos();
+replaceServicePhoto();
 
-// Native horizontal scrolling remains available without JavaScript.
 document.querySelectorAll(".work-section").forEach((section) => {
   const track = section.querySelector(".carousel-track");
   const controls = section.querySelector(".gallery-controls");
@@ -199,12 +257,8 @@ document.querySelectorAll(".work-section").forEach((section) => {
     if (!image) return;
     const gap = parseFloat(getComputedStyle(track).gap) || 0;
     track.scrollBy({
-      left:
-        Number(button.dataset.slide) *
-        (image.getBoundingClientRect().width + gap),
-      behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "instant"
-        : "smooth",
+      left: Number(button.dataset.slide) * (image.getBoundingClientRect().width + gap),
+      behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
     });
   });
   track.addEventListener("scroll", update, { passive: true });
