@@ -1,0 +1,341 @@
+/* Visual audit fixes: header, languages, mobile navigation and small-screen rhythm. */
+
+/* Keep the header composition deliberate instead of distributing every child
+   across the full row. */
+.site-header {
+  background: var(--paper);
+}
+.site-header .header-row {
+  justify-content: flex-start;
+  gap: 14px;
+}
+.site-header .brand {
+  flex: 0 0 auto;
+}
+.site-header .brand img {
+  /* The current PNG has a white canvas. Multiply makes that canvas visually
+     inherit the warm site background while preserving the original artwork. */
+  mix-blend-mode: multiply;
+  background: transparent;
+}
+.site-header nav {
+  margin-left: auto;
+}
+.header-phone {
+  margin-left: 8px;
+}
+
+/* Compact, consistent language control. */
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  line-height: 1;
+}
+.language-switcher .language-switch,
+.language-switcher .language-current {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  min-height: 32px;
+  margin: 0 !important;
+  padding: 7px 8px !important;
+  border: 0 !important;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+.language-switcher .language-switch:hover {
+  background: #ecebe5;
+}
+.language-switcher .language-current {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* JS-enhanced menu button is hidden on desktop. */
+.menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.menu-toggle span {
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.site-header.menu-open .menu-toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.site-header.menu-open .menu-toggle span:nth-child(2) {
+  opacity: 0;
+}
+.site-header.menu-open .menu-toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Improve card rhythm before the narrow-phone breakpoint. */
+.solution-card img,
+.project-card img,
+.catalog-item > img,
+.catalog-card > img {
+  background: #eceee9;
+}
+
+/* English solutions page was using catalog-card while the shared stylesheet
+   only styled catalog-item. Keep both languages visually identical. */
+.catalog-card {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  scroll-margin-top: 110px;
+}
+.catalog-card:target {
+  outline: 3px solid var(--orange);
+  outline-offset: 4px;
+}
+.catalog-card > img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  order: -1;
+}
+
+@media (max-width: 1150px) {
+  html {
+    scroll-padding-top: 96px;
+  }
+  .site-header .header-row {
+    position: relative;
+    flex-wrap: nowrap;
+    min-height: 82px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .site-header .brand img {
+    height: 66px;
+    max-width: 185px;
+  }
+  .header-phone {
+    display: block;
+    margin-left: auto;
+  }
+  .menu-toggle {
+    display: inline-flex;
+  }
+  .site-header nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    width: 100%;
+    margin: 0;
+    padding: 10px max(24px, calc((100vw - 1240px) / 2));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px 10px;
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 16px 30px rgba(23, 44, 50, 0.12);
+  }
+  .site-header.menu-open nav {
+    display: grid;
+  }
+  .site-header nav a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 12px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 15px;
+  }
+  .site-header nav a:hover {
+    background: #ecebe5;
+  }
+  .site-header nav a[aria-current="page"] {
+    border-bottom: 0;
+    background: #ecebe5;
+  }
+  .catalog-card > img {
+    height: 290px;
+  }
+}
+
+@media (max-width: 700px) {
+  html {
+    scroll-padding-top: 82px;
+  }
+  .site-header .header-row {
+    min-height: 72px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    gap: 8px;
+  }
+  .site-header .brand {
+    min-width: 0;
+    margin-right: auto;
+  }
+  .site-header .brand img {
+    height: 54px;
+    max-width: 142px;
+  }
+  .header-phone {
+    display: none !important;
+  }
+  .language-switcher {
+    gap: 0;
+    padding: 2px;
+  }
+  .language-switcher .language-switch,
+  .language-switcher .language-current {
+    min-width: 30px;
+    min-height: 30px;
+    padding: 6px !important;
+    font-size: 12px;
+  }
+  .menu-toggle {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+  .site-header nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 10px 18px 14px;
+    gap: 4px 8px;
+  }
+  .site-header nav a {
+    justify-content: flex-start;
+    text-align: left;
+    min-height: 44px;
+    font-size: 15px;
+  }
+  .hero-content {
+    padding-top: 34px;
+  }
+  .hero-heading {
+    max-width: 9ch;
+  }
+  .intro-strip .wrap {
+    align-items: start;
+  }
+  .footer-bottom {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .catalog-card > img {
+    height: 300px;
+  }
+}
+
+@media (max-width: 520px) {
+  .wrap,
+  .inner-page .container {
+    width: calc(100% - 30px);
+  }
+  .section {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .hero-heading {
+    font-size: clamp(40px, 12vw, 46px);
+    letter-spacing: -1.8px;
+  }
+  .hero-copy {
+    max-width: 100%;
+  }
+  .solution-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .solution-card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .intro-strip .wrap {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .intro-strip span:before {
+    min-width: 12px;
+  }
+  .project-card img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .page-content h1 {
+    font-size: clamp(34px, 10vw, 40px);
+  }
+  .catalog-grid {
+    gap: 22px;
+  }
+  .catalog-item > img,
+  .catalog-card > img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .carousel-track img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .contact-card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-header .brand img {
+    height: 50px;
+    max-width: 126px;
+  }
+  .language-switcher .language-switch,
+  .language-switcher .language-current {
+    min-width: 28px;
+    padding: 5px !important;
+    font-size: 11px;
+  }
+  .menu-toggle {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+  .actions .button {
+    width: 100%;
+  }
+  .hero-bottom {
+    gap: 14px;
+  }
+}
