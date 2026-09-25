@@ -23,6 +23,7 @@ module.exports = merge(common, {
         },
         { from: "partials", to: "partials" },
         { from: "tr", to: "tr" },
+        { from: "en", to: "en" },
         ...[
           "icon.svg",
           "favicon.ico",
