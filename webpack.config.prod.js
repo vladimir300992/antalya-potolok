@@ -22,6 +22,7 @@ module.exports = merge(common, {
           globOptions: { ignore: ["**/app.js", "**/AOS.js"] },
         },
         { from: "partials", to: "partials" },
+        { from: "tr", to: "tr" },
         ...[
           "icon.svg",
           "favicon.ico",
