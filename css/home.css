@@ -506,6 +506,12 @@ p + p {
   font-size: 14px;
   margin-top: 4px;
 }
+.google-review h3 { font-size: 20px; margin: 0 0 16px; overflow-wrap: anywhere; }
+.google-review > p { font-size: 17px; line-height: 1.7; margin: 0 0 24px; }
+.google-review-source { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); font-size: 15px; color: var(--muted); }
+.google-review-checked { font-size: 15px; color: var(--muted); margin-top: 18px; }
+.google-reviews .review-links { margin-top: 28px; }
+.google-reviews .button { white-space: normal; text-align: center; }
 .review-links {
   display: flex;
   gap: 30px;
