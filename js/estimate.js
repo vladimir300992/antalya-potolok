@@ -58,9 +58,31 @@
     return `По стартовой ставке: от ${amount} $ (${area} м² × ${estimate.rate} $/м²). Это не смета и не диапазон бюджета. Периметр, углы, ниши и освещение здесь отдельно не рассчитываются и могут увеличить итог. Состав и полную стоимость фиксируем в смете после уточнения деталей и замера.`;
   }
 
-  function render() {
-    result.textContent = message(calculate());
+  function track(goal) {
+    if (typeof window.ym === "function") window.ym(104430694, "reachGoal", goal, { language: lang });
   }
+  let started = false;
+  let resultTracked = false;
+  function render(event) {
+    const estimate = calculate();
+    result.textContent = message(estimate);
+    if (!event) return;
+    if (!started) { track("estimate_start"); started = true; }
+    if (estimate && !resultTracked) { track("estimate_result"); resultTracked = true; }
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const packageType = params.get("ceiling");
+  const service = params.get("service");
+  if (["standard", "shadow", "floating"].includes(packageType)) field("ceiling").value = packageType;
+  if (["shadow", "floating"].includes(service)) field("ceiling").value = service;
+  const serviceLabels = {
+    ru: { lines: "Интересуют световые линии.", track: "Интересует трековое освещение." },
+    en: { lines: "I am interested in linear lighting.", track: "I am interested in track lighting." },
+    tr: { lines: "Işık çizgileri ile ilgileniyorum.", track: "Ray aydınlatma ile ilgileniyorum." },
+  };
+  if (serviceLabels[lang]?.[service] && !field("details").value) field("details").value = serviceLabels[lang][service];
+  render();
 
   form.addEventListener("input", render);
   form.addEventListener("change", render);
@@ -102,6 +124,7 @@
       if (value) lines.push(`${label}: ${value}`);
     });
     lines.push(message(calculate()));
+    track("whatsapp_estimate");
     window.location.assign(
       `https://wa.me/905348287110?text=${encodeURIComponent(lines.join("\n"))}`,
     );
