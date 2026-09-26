@@ -19,3 +19,14 @@ ym(104430694, 'init', {
   accurateTrackBounce: true,
   trackLinks: true
 });
+
+
+// Conversion events contain no form contents or other personal information.
+document.addEventListener("click", (event) => {
+  const link = event.target.closest("a[href]");
+  if (!link || typeof window.ym !== "function") return;
+  const href = link.getAttribute("href");
+  const goal = href.startsWith("tel:") ? "phone_click"
+    : /^https:\/\/(wa\.me|api\.whatsapp\.com)\//.test(href) ? "whatsapp_click" : null;
+  if (goal) window.ym(104430694, "reachGoal", goal, { language: document.documentElement.lang || "ru" });
+});

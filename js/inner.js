@@ -18,7 +18,15 @@ function ensureMobileCta() {
     tr: { call: "Ara", estimate: "Ön fiyat ↗", href: "/tr/#calculatorSection" },
     en: { call: "Call", estimate: "Get estimate ↗", href: "/en/#calculatorSection" },
   };
-  const copy = labels[pageLanguage] || labels.ru;
+  const copy = { ...(labels[pageLanguage] || labels.ru) };
+  const servicePages = {
+    shadow: ["tenevoj-potolok.html", "golge-profil-gergi-tavan.html", "shadow-gap-ceiling.html"],
+    floating: ["paryashchiy-potolok.html", "ledli-gergi-tavan.html", "floating-led-ceiling.html"],
+    lines: ["svetovye-linii.html", "isik-cizgileri.html", "linear-lighting.html"],
+    track: ["trekovoe-osveshchenie.html", "ray-aydinlatma.html", "track-lighting.html"],
+  };
+  const service = Object.keys(servicePages).find((key) => servicePages[key].includes(currentPath.split("/").pop()));
+  if (service) copy.href = copy.href.replace("#", `?service=${service}#`);
   const cta = document.createElement("div");
   cta.className = "mobile-cta";
   cta.innerHTML = `<a href="tel:+905348287110">${copy.call}</a><a href="${copy.href}">${copy.estimate}</a>`;
@@ -93,108 +101,6 @@ function enhanceHeader() {
   });
 }
 
-function addPortfolioPhoto(sectionId, src, alt, width, height) {
-  const track = document.querySelector(`#${sectionId} .carousel-track`);
-  if (!track || track.querySelector(`img[src="${src}"]`)) return;
-  const image = document.createElement("img");
-  image.src = src;
-  image.alt = alt;
-  image.loading = "lazy";
-  image.decoding = "async";
-  image.width = width;
-  image.height = height;
-  track.append(image);
-}
-
-function addSuppliedPortfolioPhotos() {
-  const projectPages = ["/rphotos.html", "/tr/projeler.html", "/en/projects.html"];
-  if (!projectPages.includes(currentPath)) return;
-
-  const livingId = pageLanguage === "tr" ? "salon" : "living";
-  const bedroomId = pageLanguage === "tr" ? "yatak-odasi" : "bedroom";
-  const alt = {
-    ru: {
-      lines: "Световая линия и трековое освещение на натяжном потолке",
-      track: "Трековое освещение в интерьере с натяжным потолком",
-      shadow: "Теневой натяжной потолок с подвесным светильником",
-    },
-    tr: {
-      lines: "Gergi tavanda ışık çizgisi ve ray aydınlatma",
-      track: "Gergi tavanlı iç mekanda ray aydınlatma",
-      shadow: "Sarkıt aydınlatmalı gölge profilli gergi tavan",
-    },
-    en: {
-      lines: "Linear light and track lighting integrated into a stretch ceiling",
-      track: "Track lighting in an interior with a stretch ceiling",
-      shadow: "Shadow-gap stretch ceiling with pendant light",
-    },
-  }[pageLanguage] || null;
-  if (!alt) return;
-
-  addPortfolioPhoto(livingId, "/img/projects/light-lines-track.webp", alt.lines, 653, 720);
-  addPortfolioPhoto(livingId, "/img/projects/track-lighting-kitchen.webp", alt.track, 600, 400);
-  addPortfolioPhoto(bedroomId, "/img/projects/shadow-ceiling-chandelier.webp", alt.shadow, 720, 540);
-}
-
-function replaceServicePhoto() {
-  const groups = {
-    shadow: [
-      "/tenevoj-potolok.html",
-      "/tr/golge-profil-gergi-tavan.html",
-      "/en/shadow-gap-ceiling.html",
-    ],
-    lines: [
-      "/svetovye-linii.html",
-      "/tr/isik-cizgileri.html",
-      "/en/linear-lighting.html",
-    ],
-    track: [
-      "/trekovoe-osveshchenie.html",
-      "/tr/ray-aydinlatma.html",
-      "/en/track-lighting.html",
-    ],
-  };
-  const type = Object.keys(groups).find((key) => groups[key].includes(currentPath));
-  if (!type) return;
-  const image = document.querySelector(".service-photo img");
-  if (!image) return;
-
-  const copy = {
-    ru: {
-      shadow: ["/img/projects/shadow-gap-detail.webp", "Реальный теневой зазор натяжного потолка у стены"],
-      lines: ["/img/projects/linear-light-shadow.webp", "Реальная световая линия в натяжном потолке с теневым примыканием"],
-      track: ["/img/projects/track-lighting-kitchen.webp", "Реальное трековое освещение с натяжным потолком в интерьере"],
-    },
-    tr: {
-      shadow: ["/img/projects/shadow-gap-detail.webp", "Duvar kenarında gerçek gölge profilli gergi tavan detayı"],
-      lines: ["/img/projects/linear-light-shadow.webp", "Gölge profilli gergi tavanda gerçek ışık çizgisi uygulaması"],
-      track: ["/img/projects/track-lighting-kitchen.webp", "İç mekanda gerçek gergi tavan ve ray aydınlatma uygulaması"],
-    },
-    en: {
-      shadow: ["/img/projects/shadow-gap-detail.webp", "Real shadow-gap stretch ceiling detail at the wall"],
-      lines: ["/img/projects/linear-light-shadow.webp", "Real linear light installation in a shadow-gap stretch ceiling"],
-      track: ["/img/projects/track-lighting-kitchen.webp", "Real track lighting installation with a stretch ceiling"],
-    },
-  }[pageLanguage] || null;
-  if (!copy) return;
-  const [src, alt] = copy[type];
-  image.src = src;
-  image.alt = alt;
-  image.removeAttribute("srcset");
-  image.decoding = "async";
-
-  if (type === "shadow") {
-    image.width = 900;
-    image.height = 1200;
-  } else if (type === "lines") {
-    image.width = 768;
-    image.height = 960;
-  } else {
-    image.width = 600;
-    image.height = 400;
-  }
-}
-
 loadVisualFixes();
 
 const englishPairs = {
@@ -236,8 +142,6 @@ if (pageLanguage !== "en") {
 
 enhanceHeader();
 ensureMobileCta();
-addSuppliedPortfolioPhotos();
-replaceServicePhoto();
 
 document.querySelectorAll(".work-section").forEach((section) => {
   const track = section.querySelector(".carousel-track");
